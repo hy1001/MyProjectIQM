@@ -1,0 +1,17 @@
+Release Notes IQM Tools Pro
+===========================
+
+Version 1.0 (09.11.2015)
+------------------------
+- First full release of IQM Pro - the follow-up of SBPOP and SBTOOLBOX2
+- Many improvements with respect to SBPOP (stability, usability, documentation, functionality)
+- Where SBPOP used the "dataset" type, IQM Tools uses the "table" type
+- IQM Tools does not require the presence of the stats toolbox 
+- Parallel computation is used in several functions if the parallel toolbox is available
+- Recommended use of MATLAB >= R2015b (>=R2013B is required)
+- Implemented "compliance mode" for time and information stamps on figures, tables, text
+- Pre Monolix 4.3.2 not supported anymore
+- Support for NONMEM >= 7.2
+- Improved support for pharmacometric work with a new general dataset format
+- Many new tutorials available from the www.intiquan.com website, documenting the
+  use of IQM Tools Pro for pharmacometric work

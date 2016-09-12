@@ -1,0 +1,46 @@
+********** MODEL NAME
+array example
+
+********** MODEL NOTES
+
+
+********** MODEL STATES
+d/dt(x<n,0>) = 0
+d/dt(x<n,1:N>)= kon<n>*x<1>*(x<n-1>) + koff*x<n+1> - (kon*x<1>+koff)*x<n> + R<n> 
+d/dt(x<n,N+1>) = 0
+
+x<n,3>(0) = 100
+x<n,[1:2, 4:N]>(0) = n*N
+x<n,N+1>(0) = 0
+
+% In the case of negative "n", they are converted to: x_3
+% so n=3:   x<n> => x3
+% and n=-3: x<n> => x_3
+
+
+********** MODEL PARAMETERS
+N = 10
+koff = 2
+kon = 0.01
+
+********** MODEL VARIABLES
+kon<k,1:N> = kon*sqrt(k)
+
+SUMEXAMPLE1 = 5 + arraysumIQM(n^2/(x<n,1:N> + n/N))+ 56
+SUMEXAMPLE2 = arraysumIQM(x<n,1:N>)
+SUMEXAMPLE3 = arraysumIQM(x<n,[1,3,5]>)
+SUMEXAMPLE4 = arraysumIQM(x<n,[1:2:N-1]>)
+
+********** MODEL REACTIONS
+R<n,1:N> = koff*x<n+1> - kon<n>*x<n>*N*n
+
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+
+% DONE

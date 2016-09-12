@@ -1,0 +1,9 @@
+<monolix>
+	<algorithms seed="123456">
+		<populationParameters>
+			<vna value="500,200"/>
+			<iop_Kauto value="0,0"/>
+			<nmc value="1"/>
+		</populationParameters>
+	</algorithms>
+</monolix>

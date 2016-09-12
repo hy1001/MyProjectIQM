@@ -1,0 +1,34 @@
+********** DOSING NAME
+Dosing example 1
+
+********** DOSING NOTES
+This dosing schedule defines an infusion of 10 (units dependent on the 
+models implementation) to be given every second week (assuming days as time units).
+The infusion time is 2hours. 
+
+The drug infusion is repeated 5 times and starts at time=0
+
+The input to which this dosing is applied to is named INPUT1 (needs to be named 
+the same in the model)
+
+********** INPUT1
+type:           INFUSION
+time:           0       % time for first application
+deltaT:         14      % (days) time inbetween applications
+nr_repetitions: 5       % number of applications 
+D:              10      % (unit) dose
+Tinf:           2/24    % (days) 2 hours
+
+% An alternative description can be found here:
+% ********** INPUT1
+% type:           INFUSION
+% time:           [0 14 28 42 56]  % application times
+% D:              10               % (unit) dose
+% Tinf:           2/24             % (days) 2 hours
+
+% Varying doses for each time instant can be defined as follows (example)
+% ********** INPUT1
+% type:           INFUSION
+% time:           [0  14 28 42 56] % application times
+% D:              [10 20 10 15 10  % (unit) dose
+% Tinf:           2/24             % (days) 2 hours

@@ -1,0 +1,65 @@
+********** DOSING NAME
+Example file for dosing schedule syntax
+
+********** DOSING NOTES
+This file is explaining the syntax of dosing schedule definitions.
+Only a single input is defined but please note that one dosing file can 
+contain as many input definitions as you like. Limitation: They are not 
+allowed to have the same name.
+
+The percentage character "%" serves as comment character. 
+
+This file here can also be generated using the following function:
+
+  >> IQMcreateDOSfile()
+  
+********** INPUT1
+%% Data required to define an Bolus (single, multiple)
+%type: BOLUS
+%notes:              % (optional)
+%time:               % time for first application or all applications (scalar or vector)
+%deltaT:             % time inbetween applications (only if time scalar)
+%nr_repetitions:   	 % number of applications (only if time scalar + optional if time scalar)
+%D:                  % dose (scalar or vector)
+%Tlag:               % lag time for input application (optional). Default: 0
+
+%% Data required to define an Infusion (with infusion rate as parameter) (single, multiple)
+%type: INFUSION
+%notes:              % (optional)
+%time:               % time for first application or all applications (scalar or vector)
+%deltaT:             % time inbetween applications (only if time scalar)
+%nr_repetitions: 	 % number of applications (only if time scalar + optional if time scalar)
+%D:                  % dose (scalar or vector)
+%Rate:               % Infusion rate (required)
+%Tlag:               % lag time for input application (optional). Default: 0
+
+%% ALTERNATIVE: Data required to define an Infusion (with infusion time as parameter) (single, multiple)
+%type: INFUSION
+%notes:              % (optional)
+%time:               % time for first application or all applications (scalar or vector)
+%deltaT:             % time inbetween applications (only if time scalar)
+%nr_repetitions: 	 % number of applications (only if time scalar + optional if time scalar)
+%D:                  % dose (scalar or vector)
+%Tinf:               % Infusion time (required)
+%Tlag:               % lag time for input application (optional). Default: 0
+
+%% Data required to define a 1st order absorption (single, multiple)
+%type: ABSORPTION1
+%notes:              % (optional)
+%time:               % time for first application or all applications (scalar or vector)
+%deltaT:             % time inbetween applications (only if time scalar)
+%nr_repetitions: 	 % number of applications (only if time scalar + optional if time scalar)
+%D:                  % dose (scalar or vector)
+%ka:                 % Absorption rate constant (required)
+%Tlag:               % lag time for input application (optional). Default: 0
+
+%% Data required to define a 0th order absorption (single, multiple)
+%type: ABSORPTION0
+%notes:              % (optional)
+%time:               % time for first application or all applications (scalar or vector)
+%deltaT:             % time inbetween applications (only if time scalar)
+%nr_repetitions: 	 % number of applications (only if time scalar + optional if time scalar)
+%D:                  % dose (scalar or vector)
+%Tk0:                % time for absorption (required)
+%Tlag:               % lag time for input application (optional). Default: 0
+

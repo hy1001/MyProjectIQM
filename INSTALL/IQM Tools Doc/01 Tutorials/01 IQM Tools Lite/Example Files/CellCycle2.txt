@@ -1,0 +1,115 @@
+********** MODEL NAME
+CellCycle
+
+********** MODEL NOTES
+
+
+********** MODEL STATES
+d/dt(PYT) = -trans3+trans4-trans5+trans6+trans11 %species
+d/dt(PYTP) = +trans5-trans6+trans7-trans8-trans14 %species
+d/dt(MPF) = +trans7-trans8+trans9+trans10-trans21 %species
+d/dt(Cyclin) = -trans1+trans2-trans12 %species
+d/dt(YT) = +trans1+trans3-trans4+trans9-trans10-trans22 %species
+d/dt(Cdc25P) = +trans15-trans16 %species
+d/dt(Wee1) = +trans13-trans23 %species
+d/dt(APC_) = -trans19+trans20 %species
+d/dt(Cdc25) = -trans15+trans16 %species
+d/dt(Wee1P) = -trans13+trans23 %species
+d/dt(IEP) = +trans17-trans18 %species
+d/dt(IE) = -trans17+trans18 %species
+d/dt(APC) = +trans19+trans20 %species
+
+PYT(0) = 0.000000
+PYTP(0) = 0.000000
+MPF(0) = 0.000000
+Cyclin(0) = 0.000000
+YT(0) = 0.000000
+Cdc25P(0) = 1.000000
+Wee1(0) = 0.000000
+APC_(0) = 0.000000
+Cdc25(0) = 0.000000
+Wee1P(0) = 1.000000
+IEP(0) = 0.000000
+IE(0) = 1.000000
+APC(0) = 1.000000
+
+********** MODEL PARAMETERS
+k3 = 0.5 %global parameter
+k1 = 0.01 %global parameter
+V25p = 0.017 %global parameter
+V25pp = 0.17 %global parameter
+trans4_Vweepp = 1 %global parameter
+trans4_Vweep = 0.01 %global parameter
+trans5_kcak = 0.64 %global parameter
+trans6_kpp = 0.004 %global parameter
+trans7_V25p = 0.017 %global parameter
+trans7_V25pp = 0.17 %global parameter
+trans8_Vweepp = 1 %global parameter
+trans8_Vweep = 0.01 %global parameter
+trans9_kcak = 0.64 %global parameter
+trans10_kpp = 0.004 %global parameter
+trans12_V2p = 0.005 %global parameter
+trans12_V2pp = 0.25 %global parameter
+trans13_kf = 0.1 %global parameter
+trans13_Kf = 1 %global parameter
+trans15_ka = 2 %global parameter
+trans15_Ka = 0.1 %global parameter
+trans16_kb = 0.1 %global parameter
+trans16_Kb = 1 %global parameter
+trans17_kg = 2 %global parameter
+trans17_Kg = 0.01 %global parameter
+trans18_kh = 0.15 %global parameter
+trans18_Kh = 0.01 %global parameter
+trans19_kd = 0.13 %global parameter
+trans19_Kd = 1 %global parameter
+trans20_kc = 0.13 %global parameter
+trans20_Kc = 0.01 %global parameter
+trans21_V2p = 0.005 %global parameter
+trans21_V2pp = 0.25 %global parameter
+trans22_V2p = 0.005 %global parameter
+trans22_V2pp = 0.25 %global parameter
+trans11_V2p = 0.005 %global parameter
+trans11_V2pp = 0.25 %global parameter
+trans14_V2p = 0.005 %global parameter
+trans14_V2pp = 0.25 %global parameter
+trans23_ke = 2 %global parameter
+trans23_Ke = 0.1 %global parameter
+Document = 1 %compartment size
+
+********** MODEL VARIABLES
+Cdc2 = 1 %boundary species
+AA = 1 %boundary species
+
+********** MODEL REACTIONS
+trans1 = k3*Cyclin*Document %reaction kinetics
+trans2 = k1*Document %reaction kinetics
+trans3 = (V25p+Cdc25P*(V25pp-V25p))*PYT*Document %reaction kinetics
+trans4 = (trans4_Vweepp+(1-Wee1)*(trans4_Vweep-trans4_Vweepp))*YT*Document %reaction kinetics
+trans5 = trans5_kcak*PYT*Document %reaction kinetics
+trans6 = trans6_kpp*PYTP*Document %reaction kinetics
+trans7 = (trans7_V25p+Cdc25P*(trans7_V25pp-trans7_V25p))*PYTP*Document %reaction kinetics
+trans8 = (trans8_Vweepp+(1-Wee1)*(trans8_Vweep-trans8_Vweepp))*MPF*Document %reaction kinetics
+trans9 = trans9_kcak*YT*Document %reaction kinetics
+trans10 = trans10_kpp*MPF*Document %reaction kinetics
+trans12 = (trans12_V2p+APC_*(trans12_V2pp-trans12_V2p))*Cyclin*Document %reaction kinetics
+trans13 = trans13_kf*Wee1P/(trans13_Kf+Wee1P)*Document %reaction kinetics
+trans15 = trans15_ka*MPF*Cdc25/(trans15_Ka+Cdc25)*Document %reaction kinetics
+trans16 = trans16_kb*Cdc25P/(trans16_Kb+Cdc25P)*Document %reaction kinetics
+trans17 = trans17_kg*MPF*IE/(trans17_Kg+IE)*Document %reaction kinetics
+trans18 = trans18_kh*IEP/(trans18_Kh+IEP)*Document %reaction kinetics
+trans19 = trans19_kd*APC_/(trans19_Kd+APC_)*Document %reaction kinetics
+trans20 = trans20_kc*IEP*APC/(trans20_Kc+APC)*Document %reaction kinetics
+trans21 = (trans21_V2p+APC_*(trans21_V2pp-trans21_V2p))*MPF*Document %reaction kinetics
+trans22 = (trans22_V2p+APC_*(trans22_V2pp-trans22_V2p))*YT*Document %reaction kinetics
+trans11 = (trans11_V2p+APC_*(trans11_V2pp-trans11_V2p))*PYT*Document %reaction kinetics
+trans14 = (trans14_V2p+APC_*(trans14_V2pp-trans14_V2p))*PYTP*Document %reaction kinetics
+trans23 = trans23_ke*MPF*Wee1/(trans23_Ke+Wee1)*Document %reaction kinetics
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+

@@ -1,0 +1,41 @@
+********** MODEL NAME
+model3
+
+********** MODEL NOTES
+ODE based example model with 3 compartments. 
+A1: central compartment with INPUT1 (bioavailability F)
+A2: peripheral compartment into which the rest of the INPUT1 goes into
+A3: peripheral compartment with INPUT3
+
+I realize that this might not be very physiologically correct but please 
+just take it as an example on how to:
+    1) add more than a single input to a model
+    2) add the same input to the same model twice
+
+********** MODEL STATES
+d/dt(A1) = -k12*A1 + k21*A2 - k13*A1 + k31*A3 - ke*A1 + F*INPUT1
+d/dt(A2) = +k12*A1 - k21*A2 + (1-F)*INPUT1
+d/dt(A3) = +k13*A1 - k31*A3 + INPUT3
+
+********** MODEL PARAMETERS
+V = 1
+k12 = 1        
+k21 = 1        
+k13 = 1        
+k31 = 1        
+ke  = 1         
+F = 0.6
+
+********** MODEL VARIABLES
+OUTPUT1 = A1/V
+
+********** MODEL REACTIONS
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+

@@ -1,0 +1,69 @@
+********** MODEL NAME
+PKPDmodel
+
+********** MODEL NOTES
+
+Units:
+======
+Dose:			 mg
+Time:   		 days
+Concentration:   ug/ml
+Ouput:  		 PD
+
+********** MODEL STATES
+
+% PK model
+% Please note that here IV administration is INPUT1. In the popPK workflow it is INPUT2
+% Since this is matched to ADM in the dataset the popPD dataset needs to have ADM=1 for 
+% these IV doses. It is good practice (and important) in each model to start INPUT with 1.
+d/dt(Ac)    		=  - CL/Vc*Ac - VMAX*Cc/(KM+Cc) - Q1/Vc*Ac + Q1/Vp1*Ap1 + INPUT1   
+d/dt(Ap1)   		=                               + Q1/Vc*Ac - Q1/Vp1*Ap1 
+
+% PD model 
+d/dt(PD)    		= kin*(1+DRUG_EFFECT) - kout*PD 
+
+PD(0) 				= BASELINE
+
+********** MODEL PARAMETERS
+
+CL          		= 1          % <regression>   
+Vc          		= 1          % <regression>             
+Q1          		= 1          % <regression>   
+Vp1         		= 1          % <regression>   
+VMAX                = 1          % <regression>   
+KM                  = 1          % <regression>   
+
+% Disease model
+BASELINE    		= 4.9    	 % <estimate>
+kout                = 0.0265     % <estimate>
+
+% Drug effect model 
+EMAX                = 0.3012     % <estimate>
+EC50                = 20         % <estimate>
+
+********** MODEL VARIABLES
+
+% Disease model
+kin 				= kout*BASELINE
+
+% Drug effect model
+Cc 					= Ac/Vc
+DRUG_EFFECT  		= EMAX*Cc/(EC50+Cc)
+
+% Fitting output (untransformed)
+OUTPUT1             = PD
+
+% Calculation of relativs change from baseline
+PD_rel              = 100*(PD-BASELINE)/BASELINE
+
+********** MODEL REACTIONS
+
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+

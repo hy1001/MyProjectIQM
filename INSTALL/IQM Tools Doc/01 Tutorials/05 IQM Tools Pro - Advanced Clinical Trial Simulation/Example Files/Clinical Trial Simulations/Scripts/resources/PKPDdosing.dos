@@ -1,0 +1,12 @@
+********** DOSING NAME
+Dosing
+
+********** DOSING NOTES
+
+********** INPUT1
+type:   INFUSION
+time:   0            % time for first application or all applications (scalar or vector)
+D:      0            % dose (scalar or vector)
+Tinf:   1            % Infusion rate (required)
+
+

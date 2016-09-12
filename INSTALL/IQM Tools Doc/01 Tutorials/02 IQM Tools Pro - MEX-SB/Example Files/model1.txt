@@ -1,0 +1,30 @@
+********** MODEL NAME
+Simple Model
+
+********** MODEL NOTES
+just a simple model to be used to 
+explain the experiment description
+
+********** MODEL STATES
+d/dt(A) = -R
+d/dt(B) = R
+
+A(0) = 1
+B(0) = 0
+
+********** MODEL PARAMETERS
+k1 = 0.5
+
+********** MODEL VARIABLES
+
+
+********** MODEL REACTIONS
+R = k1*A
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS

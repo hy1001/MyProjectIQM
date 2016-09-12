@@ -1,0 +1,12 @@
+<TT>   Text file generation log           
+       =====================================================================================================================================================================
+
+<TR>   File (relative to calling function) | ../Models/MODEL_PD_FINALMODEL/RESULTS/project_results.txt                                                                      
+<TR>   Username                            | henning                                                                                                                        
+<TR>   Date of creation                    | 2015-Nov-08 10:56                                                                                                              
+<TR>   Calling sequence                    | Main analysis file undefined due to execution in parfor loop                                                                   
+<TR>                                       | C:/Program Files/MATLAB/R2015b/toolbox/distcomp/remoteParallelFunction.m (Line: 38)                                            
+<TR>                                       | C:/Program Files/MATLAB/R2015b/toolbox/matlab/lang/parallel_function.p (Line: 929)                                             
+<TR>                                       | C:/PROJECTS/iqmtools/01 IQM Tools Suite/IQMpro/tools/05-NLMEtoolsInterfaces/02-NONMEM/IQMrunNONMEMproject.m (Line: 84)         
+<TR>                                       | C:/PROJECTS/iqmtools/01 IQM Tools Suite/IQMpro/tools/05-NLMEtoolsInterfaces/02-NONMEM/IQMcreateNONMEMresultsTable.m (Line: 384)
+<TR>                                       | C:/PROJECTS/iqmtools/01 IQM Tools Suite/IQMlite/auxiliary/output/IQMwriteText2File.m (Line: 50)                                

@@ -1,0 +1,121 @@
+; MLXTRAN PROJECT, created using IQM Tools
+; Date: 2015-Oct-08 17:39
+; By:   Henning
+
+; ==PROJECT HEADER START===================================================
+; DATA                = '../../Data/dataNLME_popPK.csv'
+; DOSINGTYPES         = 'BOLUS,INFUSION'
+; COVNAMES            = 'AGE0,WT0'
+; CATNAMES            = 'SEX,STUDYN,TRT,IND'
+; CATCATEGORIES       = '[1,2],[1,2,3,4],[1,2,3,5],[1,2,3]'
+; REGRESSIONNAMES     = ''
+; OUTPUTS             = 'Cc'
+; ERRORMODELS         = 'prop'
+; PARAMNAMES          = 'CL,Vc,Q1,Vp1,Q2,Vp2,Fiv,Fabs1,ka,Tlaginput1,VMAX,KM'
+; PARAMTRANS          = 'exp(phi),exp(phi),exp(phi),exp(phi),exp(phi),exp(phi),exp(phi),exp(phi),exp(phi),exp(phi),exp(phi),exp(phi)'
+; PARAMINVTRANS       = 'log(psi),log(psi),log(psi),log(psi),log(psi),log(psi),log(psi),log(psi),log(psi),log(psi),log(psi),log(psi)'
+; COVARIATENAMES      = 'AGE0,WT0,SEX,STUDYN,TRT,IND'
+; COVARIATESUSED      = 'SEX,WT0'
+; BETACOVNAMES        = 'beta_CL(WT0),beta_Vc(WT0),beta_Vp1(WT0)'
+; BETACOVTRANS        = 'log(cov/73.95),log(cov/73.95),log(cov/73.95)'
+; BETACATNAMES        = 'beta_CL(SEX),beta_Vc(SEX)'
+; BETACATREFERENCE    = '1,1'
+; ==PROJECT HEADER END=====================================================
+
+; =============================================
+DESCRIPTION:
+; =============================================
+	FITMODEL_PK__06_COVARIANCE_006
+
+; =============================================
+DATA:
+; =============================================
+	path = "%MLXPROJECT%/../../Data/",
+	file  ="dataNLME_popPK.csv",
+	headers = {IGNORE,ID,IGNORE,IGNORE,IGNORE,TIME,IGNORE,IGNORE,IGNORE,YTYPE,IGNORE,DV,IGNORE,CENS,MDV,EVID,AMT,ADM,IGNORE,RATE,IGNORE,IGNORE,COV,COV,CAT,CAT,CAT,CAT},
+	columnDelimiter = ","
+
+; =============================================
+VARIABLES:
+; =============================================
+	AGE0,
+	t_AGE0 = log(AGE0/67) [use=cov],
+	WT0,
+	t_WT0 = log(WT0/73.95) [use=cov],
+	SEX [use=cov, type=cat],
+	STUDYN [use=cov, type=cat],
+	TRT [use=cov, type=cat],
+	IND [use=cov, type=cat]
+
+; =============================================
+INDIVIDUAL:
+; =============================================
+	CL = {distribution=logNormal, covariate={t_WT0,SEX}, iiv=yes},
+	Vc = {distribution=logNormal, covariate={t_WT0,SEX}, iiv=yes},
+	Q1 = {distribution=logNormal, iiv=yes},
+	Vp1 = {distribution=logNormal, covariate={t_WT0}, iiv=yes},
+	Q2 = {distribution=logNormal, iiv=no},
+	Vp2 = {distribution=logNormal, iiv=no},
+	Fiv = {distribution=logNormal, iiv=no},
+	Fabs1 = {distribution=logNormal, iiv=no},
+	ka = {distribution=logNormal, iiv=no},
+	Tlaginput1 = {distribution=logNormal, iiv=no},
+	VMAX = {distribution=logNormal, iiv=no},
+	KM = {distribution=logNormal, iiv=no}
+
+; =============================================
+CORRELATION:
+; =============================================
+	correlationIIV = {{CL,Vc}}
+
+; =============================================
+STRUCTURAL_MODEL:
+; =============================================
+	file = "mlxt:model_MLXTRAN",
+	path = "%MLXPROJECT%/../../../Data/",
+	output = {Cc}
+
+; =============================================
+OBSERVATIONS:
+; =============================================
+	y1 = {type=continuous, prediction=Cc, error=proportional}
+
+; =============================================
+TASKS:
+; =============================================
+	; settings
+	globalSettings={
+		withVariance=no,
+		settingsGraphics="%MLXPROJECT%/project_graphics.xmlx",
+		settingsAlgorithms="%MLXPROJECT%/project_algorithms.xmlx",
+		resultFolder="%MLXPROJECT%/RESULTS"},
+	; workflow
+	estimatePopulationParameters(
+		initialValues={
+			pop_{CL} = 0.0926335 ,
+			pop_{Vc} = 0.389866 ,
+			pop_{Q1} = 0.110168 ,
+			pop_{Vp1} = 1.37524 ,
+			pop_{Q2} = 1e-10 [method=FIXED],
+			pop_{Vp2} = 1 [method=FIXED],
+			pop_{Fiv} = 1 [method=FIXED],
+			pop_{Fabs1} = 1 [method=FIXED],
+			pop_{ka} = 1 [method=FIXED],
+			pop_{Tlaginput1} = 1e-10 [method=FIXED],
+			pop_{VMAX} = 2.11636 ,
+			pop_{KM} = 3.91087 ,
+			beta_{CL,t_WT0} = 0 ,
+			beta_{CL,SEX} = 0 ,
+			beta_{Vc,t_WT0} = 0 ,
+			beta_{Vc,SEX} = 0 ,
+			beta_{Vp1,t_WT0} = 0 ,
+			b_y1 = 0.15,
+			omega_{CL} = 0.5,
+			omega_{Vc} = 0.5,
+			omega_{Q1} = 0.5,
+			omega_{Vp1} = 0.5
+		} ),
+	estimateFisherInformationMatrix( method={linearization} ),
+	estimateIndividualParameters( method={conditionalMode} ),
+	estimateLogLikelihood(method={linearization}),
+	displayGraphics()

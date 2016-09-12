@@ -1,0 +1,79 @@
+********** MODEL NAME
+Glucose Insulin Model
+
+********** MODEL NOTES
+Very simple Glucose/Insulin interaction model ... 
+
+Units: 
+- Time in minutes
+- Glucose state (Gc) in mmol/l - central compartment
+- Insulin state (I) in uU/ml 
+- INPUT1: glucose in gramm => requires conversion
+- OUTPUT1: glucose in mmol/l
+- OUTPUT2: glucose in uU/ml
+
+********** MODEL STATES
+
+% Glucose absorption - first order
+% Glucose input in gramm => convert to mmol/l
+% Gd then in mmol/l
+d/dt(Gd) = -kaG*Gd + 1000/VG/180.182*INPUT1
+
+% Glucose
+% Gc in mmol/l
+% - At baseline values of Glucose and Insulin no change is happening (without absorption from extern)
+% - Insulin above baseline is reducing glucose
+d/dt(Gc)  = +kaG*Gd - p1*(Gc-Gb) - p2*(I-Ib) - kG1*Gc + kG2*Gp
+d/dt(Gp) = 								       kG1*Gc - kG2*Gp
+
+% Insulin
+% I in uU/ml
+% - At baseline values of Glucose and Insulin no change is happening
+% - Glucose above baseline is stimulating Insulin production
+d/dt(I)  = -p3*(I-Ib) + p4*(Gc-Gb)
+
+% Initial conditions
+Gd(0)    = 0
+Gc(0)     = Gb
+Gp(0)    = kG1/kG2*Gb
+I(0)     = Ib
+
+********** MODEL PARAMETERS
+
+% Baseline parameters for glucose and insulin
+Gb       = 5            % (1/min)               <estimate>
+Ib       = 7            % (1/min)               <estimate>
+
+% Glucose volume parameter for scaling the input from amount to concentration
+VG       = 10           % (l)                   <estimate>
+
+% Glucose absorption parameter
+kaG       = 0.05         % (1/min)               <estimate>
+
+% Glucose distribution parameter - second compartment
+kG1      = 0.2          % (1/min)               <estimate>
+kG2      = 0.2          % (1/min)               <estimate>
+
+% Glucose-Insulin interaction parameter
+p1       = 0.04         % (1/min)               <estimate>
+p2       = 0.02         % (mmol/l/(uU/ml)/min)  <estimate>
+p3       = 0.06         % (1/min)               <estimate>
+p4       = 0.25         % (uU/ml/(mmol/l)/min)  <estimate>
+
+********** MODEL VARIABLES
+
+% Definition of outputs for linking to NLME parameter estimation tools
+OUTPUT1  = Gc
+OUTPUT2  = I
+
+********** MODEL REACTIONS
+
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+

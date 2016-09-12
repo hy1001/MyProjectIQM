@@ -1,0 +1,104 @@
+******************************************************************
+*      project.mlxtran
+*      January 31, 2016 at 11:42:16
+*      Monolix version: 4.3.2
+******************************************************************
+
+Estimation of the population parameters
+
+                   parameter     s.e. (lin)   r.s.e.(%)    p-value 
+CL_pop           :   0.0634        0.002           3               
+beta_CL_t_WT0    :     0.45         0.11          23        2e-005 
+beta_CL_SEX_2    :    0.253         0.04          16      4.2e-010 
+Vc_pop           :     0.68        0.017           3               
+beta_Vc_t_WT0    :    0.546         0.11          19      2.1e-007 
+beta_Vc_SEX_2    :    0.157         0.04          26        9e-005 
+Q1_pop           :    0.125       0.0053           4               
+Vp1_pop          :     1.33        0.046           3               
+beta_Vp1_t_WT0   :    0.312         0.15          49         0.041 
+Q2_pop           :   1e-010          -           -                 
+Vp2_pop          :        1          -           -                 
+Fiv_pop          :        1          -           -                 
+Fabs1_pop        :        1          -           -                 
+ka_pop           :        1          -           -                 
+Tlaginput1_pop   :   1e-010          -           -                 
+VMAX_pop         :     1.86         0.17           9               
+KM_pop           :      3.5         0.78          22               
+
+omega_CL         :    0.155        0.013           9               
+omega_Vc         :    0.149        0.014           9               
+omega_Q1         :    0.181        0.044          24               
+omega_Vp1        :    0.235        0.026          11               
+omega_Q2         :        0          -           -                 
+omega_Vp2        :        0          -           -                 
+omega_Fiv        :        0          -           -                 
+omega_Fabs1      :        0          -           -                 
+omega_ka         :        0          -           -                 
+omega_Tlaginput1 :        0          -           -                 
+omega_VMAX       :        0          -           -                 
+omega_KM         :        0          -           -                 
+corr(CL,Vc)      :    0.409         0.11          26               
+
+b                :    0.114       0.0036           3               
+
+correlation matrix (IIV)
+CL       1          
+Vc    0.41       1       
+Q1       0       0       1    
+Vp1      0       0       0       1 
+
+______________________________________________
+correlation matrix of the estimates(linearization)
+
+CL_pop              1                               
+beta_CL_t_WT0    0.15       1                            
+beta_CL_SEX_2   -0.65   -0.42       1                         
+Vc_pop           0.29    0.13   -0.26       1                      
+beta_Vc_t_WT0     0.1    0.37   -0.16    0.33       1                   
+beta_Vc_SEX_2   -0.21   -0.16    0.37   -0.71   -0.44       1                
+Q1_pop          -0.07    0.06    0.02   -0.02      -0    0.01       1             
+Vp1_pop         -0.18    0.07    0.07   -0.01      -0       0    0.33       1          
+beta_Vp1_t_WT0  -0.02    0.02    0.01      -0   -0.01       0    0.06    0.02       1       
+VMAX_pop        -0.55    0.17    0.11   -0.01       0    0.01     0.4    0.28    0.07       1    
+KM_pop          -0.37    0.08    0.06   -0.01       0       0    0.34     0.1    0.11    0.84       1 
+
+Eigenvalues (min, max, max/min): 0.086  2.8  33
+
+omega_CL       1             
+omega_Vc    0.14       1          
+omega_Q1   -0.07    0.01       1       
+omega_Vp1  -0.01    0.01   -0.05       1    
+b          -0.01   -0.08   -0.19   -0.07       1 
+
+Eigenvalues (min, max, max/min): 0.76  1.2  1.6
+
+_______________
+Estimation of the population parameters by groups
+
+              parameter     s.e. (lin)   r.s.e.(%) 
+CL_(SEX=1*) :   0.0634        0.002          3     
+CL_(SEX=2 ) :   0.0817       0.0026          3     
+Vc_(SEX=1*) :     0.68        0.017          3     
+Vc_(SEX=2 ) :    0.796        0.023          3     
+
+Numerical covariates
+	t_WT0 = log(WT0/73.95)		
+
+Categorical covariates
+	SEX
+ 		Reference group: 1 
+		Other groups:  2
+		
+
+Population parameters and Fisher Information Matrix estimation...
+
+Elapsed time is 379 seconds. 
+CPU time is 1.91e+003 seconds. 
+______________________________________________________________
+
+Log-likelihood Estimation by linearization
+
+-2 x log-likelihood:                   7529.16 
+Akaike Information Criteria   (AIC):   7563.16 
+Bayesian Information Criteria (BIC):   7604.88 
+______________________________________________________________

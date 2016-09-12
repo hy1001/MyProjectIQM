@@ -1,0 +1,28 @@
+********** MODEL NAME
+modelPK
+********** MODEL NOTES
+Example model for IQM Tools Tutorial
+Simple linear one compartment PK model with 1st order absorption.
+
+
+********** MODEL STATES
+d/dt(Ad) = -ka*Ad + INPUT1
+d/dt(Ac) =  ka*Ad - CL/Vc*Ac 
+********** MODEL PARAMETERS
+ka = 1   % (1/hours) <estimate>
+CL = 3   % (L/hours) <estimate>
+Vc = 60  % <estimate>
+********** MODEL VARIABLES
+Cc = Ac/Vc
+OUTPUT1 = Cc
+********** MODEL REACTIONS
+
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+

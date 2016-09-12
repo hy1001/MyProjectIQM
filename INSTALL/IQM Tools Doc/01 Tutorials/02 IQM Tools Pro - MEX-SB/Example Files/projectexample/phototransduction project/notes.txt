@@ -1,0 +1,4 @@
+This is an example project for the IQM Tools tutorial
+
+In this notes.txt file you can document your project. Additionally,
+you can add all kinds of additional documents in the different folders.

@@ -1,0 +1,197 @@
+; NONMEM PROJECT, created using IQM Tools
+; Date: 2015-Oct-12 18:47
+; By:   Henning
+
+; ==PROJECT HEADER START===================================================
+; METHOD              = 'ITS,SAEM,IMP'
+; DATA                = '../../Data/dataNLME_popPD.csv'
+; DOSINGTYPES         = 'INFUSION'
+; COVNAMES            = 'AGE0,WT0,EFF0'
+; CATNAMES            = 'SEX,STUDYN,TRT,IND'
+; REGRESSIONNAMES     = 'CL,Vc,Q1,Vp1,VMAX,KM'
+; OUTPUTS             = 'PD'
+; ERRORMODELS         = 'const'
+; ERRORNAMES          = 'error_ADD1'
+; PARAMNAMES          = 'BASELINE,kout,EMAX,EC50'
+; PARAMTRANS          = '(phi),exp(phi),(phi),exp(phi)'
+; PARAMINVTRANS       = '(psi),log(psi),(psi),log(psi)'
+; COVARIATENAMES      = 'AGE0,WT0,EFF0,SEX,STUDYN,TRT,IND'
+; COVARIATESUSED      = 'AGE0,SEX,WT0'
+; BETACOVNAMES        = 'beta_BASELINE(AGE0),beta_BASELINE(WT0)'
+; BETACOVTRANS        = 'log(cov/66),log(cov/72.6)'
+; BETACATNAMES        = 'beta_BASELINE(SEX)'
+; BETACATREFERENCE    = '1'
+; BETACATCATEGORIES   = '[1 2]'
+; THETANAMES          = 'BASELINE,kout,EMAX,EC50,beta_BASELINE(AGE0),beta_BASELINE(WT0),beta_BASELINE(SEX_2),error_ADD1'
+; THETAESTIMATE       = '1,1,1,1,1,1,1,1'
+; ETANAMES            = 'omega(BASELINE),omega(kout),omega(EMAX),omega(EC50)'
+; ETAESTIMATE         = '1,1,2,1'
+; CORRELATIONNAMES    = ''
+; CORRESTIMATE        = ''
+; NROBSERVATIONS      = '674'
+; NRPARAM_ESTIMATED   = '11'
+; RESIDUAL_NAMES_USED = 'XPRED,XRES,XWRES'
+; RESIDUAL_NAMES_ORIG = 'EPRED,ERES,EWRES'
+; ==PROJECT HEADER END=====================================================
+
+$SIZES LIM1=892
+$SIZES LIM2=892
+$SIZES LIM6=892
+$SIZES LTH=8
+
+$PROBLEM MODEL_1
+
+; Units:
+; ======
+; Dose:			 mg
+; Time:   		 days
+; Concentration:   ug/ml
+; Ouput:  		 PD
+
+$DATA ../../Data/dataNLME_popPD.csv
+    IGNORE=@
+
+$INPUT SKIP ID SKIP SKIP SKIP TIME2 TIME SKIP SKIP YTYPE SKIP DV SKIP CENS 
+       MDV EVID AMT CMT SKIP RATE SKIP SKIP AGE0 WT0 EFF0 SEX STUDYN TRT 
+       IND CL Vc Q1 Vp1 VMAX KM
+
+$SUBROUTINE ADVAN13 TOL=6
+
+$MODEL
+    COMP = (Ac)     ; Compartment 1
+    COMP = (Ap1)    ; Compartment 2
+    COMP = (PD)     ; Compartment 3
+
+$PK
+; Parameters
+    Tinfinput1 = 1	; Infusion rate (required)
+
+; Auxiliary definitions for handling categorical covariates
+    SEX_2 = 0 ; reference: 1
+    IF(SEX.EQ.2) SEX_2 = 1
+
+; MU Referencing
+    MU1WRAP_1 = THETA(5)*log(AGE0/66) + THETA(6)*log(WT0/72.6) + THETA(7)*SEX_2    ; BASELINE
+    MU_1  = THETA(1)  + MU1WRAP_1
+    MU_2  = THETA(2)     ; kout
+    MU_3  = THETA(3)     ; EMAX
+    MU_4  = THETA(4)     ; EC50
+
+; MU+ETA
+    T_BASELINE  = MU_1 + ETA(1)
+    T_kout      = MU_2 + ETA(2)
+    T_EMAX      = MU_3 + ETA(3)
+    T_EC50      = MU_4 + ETA(4)
+
+; Parameter transformations
+    BASELINE  = T_BASELINE
+    kout      = EXP(T_kout)
+    EMAX      = T_EMAX
+    EC50      = EXP(T_EC50)
+
+; Dosing compartments info
+    F1 = 1 ; Ac
+
+
+
+; Initial conditions
+    A_0(1) = 0
+    A_0(2) = 0
+    A_0(3) = BASELINE
+
+; Define TIMEOFFSET
+    TIMEOFFSET = TIME-TIME2
+
+$DES
+; States
+    DES_Ac   = A(1)
+    DES_Ap1  = A(2)
+    DES_PD   = A(3)
+
+; Variables
+    DES_kin          = kout*BASELINE
+    DES_Cc           = DES_Ac/Vc
+    DES_DRUG_EFFECT  = EMAX*DES_Cc/(EC50+DES_Cc)
+    DES_PD_rel       = 100*(DES_PD-BASELINE)/BASELINE
+
+; ODEs
+    DADT(1) = -CL/Vc*DES_Ac-VMAX*DES_Cc/(KM+DES_Cc)-Q1/Vc*DES_Ac+Q1/Vp1*DES_Ap1  ; Ac
+    DADT(2) = Q1/Vc*DES_Ac-Q1/Vp1*DES_Ap1                                        ; Ap1
+    DADT(3) = DES_kin*(1+DES_DRUG_EFFECT)-kout*DES_PD                            ; PD
+
+$ERROR
+; States
+    Ac   = A(1)
+    Ap1  = A(2)
+    PD   = A(3)
+
+; Variables
+    kin          = kout*BASELINE
+    Cc           = Ac/Vc
+    DRUG_EFFECT  = EMAX*Cc/(EC50+Cc)
+    PD_rel       = 100*(PD-BASELINE)/BASELINE
+
+; just to avoid a NONMEM warning
+    Y     = 0.1
+
+; Error model OUTPUT1 / PD
+    IPRED  = PD
+    IRES   = DV - IPRED
+    W      = THETA(8)
+    IWRES  = IRES/W
+    IF(YTYPE.EQ.1) THEN
+        Y      = IPRED + W*ERR(1)
+    ENDIF
+
+; Assign variables to report in tables
+    ETA_BASELINE  = ETA(1)
+    ETA_kout  = ETA(2)
+    ETA_EMAX  = ETA(3)
+    ETA_EC50  = ETA(4)
+
+$THETA
+; Model parameters
+    27.8   ; 1 (BASELINE) (27.8)
+    -3.44  ; 2 log(kout) (0.032)
+    0.161  ; 3 (EMAX) (0.161)
+    3.02   ; 4 log(EC50) (20.5)
+
+; Continuous covariate model parameters
+    0.1 ; 5 beta_BASELINE(AGE0)
+    0.1 ; 6 beta_BASELINE(WT0)
+
+; Categorical covariate model parameters
+    0.1 ; 7 beta_BASELINE(SEX_2)
+
+; Error model parameters
+    1.5      ; 8 Additive error OUTPUT1
+
+$OMEGA
+    9 STANDARD         ; 1 BASELINE
+    0.4 STANDARD       ; 2 kout
+    0.04 STANDARD FIX  ; 3 EMAX
+    0.85 STANDARD      ; 4 EC50
+
+$SIGMA
+    1 FIX
+
+$ESTIMATION METHOD=ITS INTERACTION  NOABORT NITER=10 SIGDIGITS=3 PRINT=1
+$ESTIMATION METHOD=SAEM INTERACTION  NOABORT NBURN=500 NITER=200 ISAMPLE=1
+            CONSTRAIN=1 CTYPE=0 SEED=123456 POSTHOC SIGDIGITS=3 PRINT=1
+$ESTIMATION METHOD=IMP NOABORT EONLY=1 ISAMPLE=1000 NITER=10 MAPITER=0
+            SIGDIGITS=3 PRINT=1
+
+$COVARIANCE UNCONDITIONAL MATRIX=S
+
+$TABLE ID TIME TIME2 YTYPE MDV EVID DV IPRED IRES IWRES NPDE EPRED=XPRED 
+       ERES=XRES  EWRES=XWRES  NOPRINT ONEHEADER NOAPPEND FILE=project.pred
+       FORMAT=s1PG15.6 ESAMPLE=1000 SEED=123456
+
+$TABLE ID ETA_BASELINE ETA_kout ETA_EMAX ETA_EC50 AGE0 WT0 EFF0 SEX STUDYN TRT
+       IND NOPRINT ONEHEADER FIRSTONLY NOAPPEND FILE=project.eta
+       FORMAT=s1PG15.6
+
+$TABLE ID BASELINE kout EMAX EC50 CL Vc Q1 Vp1 VMAX KM AGE0 WT0 EFF0 SEX STUDYN
+       TRT IND NOPRINT ONEHEADER FIRSTONLY NOAPPEND FILE=project.indiv
+       FORMAT=s1PG15.6
+

@@ -1,0 +1,11 @@
+********** DOSING NAME
+Dosing example 2
+
+********** DOSING NOTES
+This dosing example defines a first order absorption on INPUT1
+
+********** INPUT1
+type:           ABSORPTION1
+time:           0       % time for first application
+D:              10      % (unit) dose
+ka:             1       % Absorption rate constant

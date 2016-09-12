@@ -1,0 +1,300 @@
+<monolix>
+	<project mlxVersion="4.3.2" name="project.xmlx">
+		<covariateDefinitionList>
+			<covariateDefinition columnName="AGE0" name="t_AGE0" transformation="log(cov/67)" type="continuous"/>
+			<covariateDefinition columnName="WT0" name="t_WT0" transformation="log(cov/73.95)" type="continuous"/>
+			<covariateDefinition columnName="SEX" type="categorical">
+				<groupList>
+					<group name="1" reference="true"/>
+					<group name="2"/>
+				</groupList>
+			</covariateDefinition>
+			<covariateDefinition columnName="STUDYN" type="categorical">
+				<groupList>
+					<group name="1" reference="true"/>
+					<group name="2"/>
+					<group name="3"/>
+					<group name="4"/>
+				</groupList>
+			</covariateDefinition>
+			<covariateDefinition columnName="TRT" type="categorical">
+				<groupList>
+					<group name="1" reference="true"/>
+					<group name="2"/>
+					<group name="3"/>
+					<group name="5"/>
+				</groupList>
+			</covariateDefinition>
+			<covariateDefinition columnName="IND" type="categorical">
+				<groupList>
+					<group name="1" reference="true"/>
+					<group name="2"/>
+					<group name="3"/>
+				</groupList>
+			</covariateDefinition>
+		</covariateDefinitionList>
+		<data columnDelimiter="," headers="IGNORE,ID,IGNORE,IGNORE,IGNORE,TIME,IGNORE,IGNORE,IGNORE,YTYPE,IGNORE,DV,IGNORE,CENS,MDV,EVID,AMT,ADM,IGNORE,RATE,IGNORE,IGNORE,COV,COV,CAT,CAT,CAT,CAT" uri="c:/PROJECTS/iqmtools/03 Documentation/01 Tutorials/X05 IQM Tools Pro - Advanced Clinical Trial Simulation/Example Files/Clinical Trial Simulations/Models/MODEL_PK_FINALMODEL/../../Data/dataNLME_popPK.csv"/>
+		<models>
+			<statisticalModels>
+				<parameterList>
+					<parameter name="CL" transformation="L">
+						<intercept estimationMethod="MLE" initialization="0.0926335"/>
+						<betaList>
+							<beta covariate="t_WT0" estimationMethod="MLE" initialization="0"/>
+							<beta covariate="SEX" estimationMethod="MLE" initialization="0"/>
+						</betaList>
+						<variability estimationMethod="MLE" initialization="0.5" level="1" levelName="IIV"/>
+					</parameter>
+					<parameter name="Vc" transformation="L">
+						<intercept estimationMethod="MLE" initialization="0.389866"/>
+						<betaList>
+							<beta covariate="t_WT0" estimationMethod="MLE" initialization="0"/>
+							<beta covariate="SEX" estimationMethod="MLE" initialization="0"/>
+						</betaList>
+						<variability estimationMethod="MLE" initialization="0.5" level="1" levelName="IIV"/>
+					</parameter>
+					<parameter name="Q1" transformation="L">
+						<intercept estimationMethod="MLE" initialization="0.110168"/>
+						<variability estimationMethod="MLE" initialization="0.5" level="1" levelName="IIV"/>
+					</parameter>
+					<parameter name="Vp1" transformation="L">
+						<intercept estimationMethod="MLE" initialization="1.37524"/>
+						<betaList>
+							<beta covariate="t_WT0" estimationMethod="MLE" initialization="0"/>
+						</betaList>
+						<variability estimationMethod="MLE" initialization="0.5" level="1" levelName="IIV"/>
+					</parameter>
+					<parameter name="Q2" transformation="L">
+						<intercept estimationMethod="FIXED" initialization="1e-010"/>
+					</parameter>
+					<parameter name="Vp2" transformation="L">
+						<intercept estimationMethod="FIXED" initialization="1"/>
+					</parameter>
+					<parameter name="Fiv" transformation="L">
+						<intercept estimationMethod="FIXED" initialization="1"/>
+					</parameter>
+					<parameter name="Fabs1" transformation="L">
+						<intercept estimationMethod="FIXED" initialization="1"/>
+					</parameter>
+					<parameter name="ka" transformation="L">
+						<intercept estimationMethod="FIXED" initialization="1"/>
+					</parameter>
+					<parameter name="Tlaginput1" transformation="L">
+						<intercept estimationMethod="FIXED" initialization="1e-010"/>
+					</parameter>
+					<parameter name="VMAX" transformation="L">
+						<intercept estimationMethod="MLE" initialization="2.11636"/>
+					</parameter>
+					<parameter name="KM" transformation="L">
+						<intercept estimationMethod="MLE" initialization="3.91087"/>
+					</parameter>
+				</parameterList>
+				<correlationModelList>
+					<correlationModel level="1" levelName="IIV">
+						<blockList>
+							<block parameters="CL,Vc"/>
+						</blockList>
+					</correlationModel>
+				</correlationModelList>
+				<observationModelList>
+					<observationModel name="y1" outputId="1" pred="Cc" type="continuous">
+						<error alias="prop">
+							<parameterList>
+								<parameter estimationMethod="MLE" initialization="0.15" name="b"/>
+							</parameterList>
+						</error>
+					</observationModel>
+				</observationModelList>
+			</statisticalModels>
+			<structuralModelList>
+				<structuralModel id="1" name="mlxt:model_MLXTRAN" output="1" outputName="Cc" uri="%MLXPROJECT%"/>
+			</structuralModelList>
+		</models>
+		<settings>
+			<tasks>
+				<scenario computeResults="true" estimateFisherInformationMatrix="true" estimateIndividualParameters="true" estimateLogLikelihood="true" estimatePopulationParameters="true"/>
+				<individualParameterAlgorithms conditionalDistribution="false" conditionalMode="true"/>
+				<logLikelihoodAlgorithms importantSampling="false" linearization="true"/>
+				<fisherInformationMatrixAlgorithms linearization="true"/>
+			</tasks>
+			<options>
+				<estimateVariances value="false"/>
+				<showStandardErrorsInPercents value="true"/>
+				<resultFolder uri="%MLXPROJECT%"/>
+			</options>
+			<algorithms seed="123456">
+				<logLikelihood>
+					<M_is value="20000"/>
+					<optimize value="0"/>
+					<Mtest_is value="2000"/>
+					<tdof_fixed value="5"/>
+					<tdof_opt value="1,2,5,10,15"/>
+					<tdof value="5"/>
+					<MMindiv value="10"/>
+					<timeEstimator value="auto"/>
+				</logLikelihood>
+				<populationParameters>
+					<kdisp value="50"/>
+					<K0 value="5"/>
+					<iop_sa value="1"/>
+					<coef_sa value="0.95,0.95"/>
+					<rK2 value="0.1"/>
+					<nu value="2,0,2,2"/>
+					<rmcmc value="0.3"/>
+					<fr_rmcmc value="0.4"/>
+					<vna value="500,200"/>
+					<va value="0,1"/>
+					<niter_mcmc value="20"/>
+					<iop_Kauto value="0,0"/>
+					<lK value="100,50"/>
+					<dU value="5"/>
+					<nmc value="1"/>
+					<iop_nmc value="0"/>
+					<nb_indiv value="50"/>
+					<kde0 value="25"/>
+					<maxIter_initEta value="50"/>
+					<no_const_error value="5"/>
+					<no_autocorr value="50"/>
+					<optim_iter value="20"/>
+					<freq_error_c value="20"/>
+					<rG value="0.5"/>
+					<DGamma2_phi0_ini value="1"/>
+					<sign_df value="10"/>
+					<strategy value="2"/>
+					<niter_cov value="4"/>
+					<no_mixture value="100"/>
+					<em_niter value="10"/>
+					<sd_alpha value="1"/>
+					<sd_ratio value="4"/>
+					<min_prop value="0.1"/>
+					<acceptanceRatio value="0.85"/>
+					<nu_times value="2"/>
+					<maxIterForTimes value="200"/>
+				</populationParameters>
+				<individualParameters>
+					<kdisp value="50"/>
+					<nu value="2,0,2,2"/>
+					<fr_rmcmc value="0.4"/>
+					<rmcmc value="0.3"/>
+					<L_mcmc value="50"/>
+					<r_mcmc value="0.05"/>
+					<mixt_iter value="100"/>
+					<take_eta_ratio value="0.5"/>
+					<nb_max_simulated_eta value="50"/>
+					<take_prior_iterations value="1"/>
+					<take_prior_ratio value="0.1"/>
+					<nb_max_simulated_theta value="1000"/>
+					<timeEstimator value="auto"/>
+					<tempi_hmm value="10"/>
+					<tempf_hmm value="10"/>
+					<kiter_hmm value="50"/>
+					<niter_hmm value="200"/>
+				</individualParameters>
+				<fisherInformationMatrix>
+					<timeEstimator value="auto"/>
+					<nu value="2,0,2,2"/>
+					<fr_rmcmc value="0.4"/>
+					<rmcmc value="0.3"/>
+					<nburn_iter value="10"/>
+					<L_mcmc value="50"/>
+					<retries value="5"/>
+					<nktest value="1"/>
+					<Nsim value="100000"/>
+					<reldiff value="0.001"/>
+				</fisherInformationMatrix>
+				<linearization>
+					<Nsim value="100000"/>
+					<reldiff value="0.001"/>
+					<mindiff value="1e-010"/>
+				</linearization>
+				<simulation>
+					<nbReplicates value="1"/>
+					<seed value="123456"/>
+					<option value="1"/>
+				</simulation>
+				<results>
+					<timeEstimator value="auto"/>
+					<max_vectorsize value="Inf"/>
+					<Knpde value="500"/>
+					<Knpde_ode value="100"/>
+					<Kvpc value="100"/>
+					<Kvpc_ode value="50"/>
+					<nx value="100"/>
+				</results>
+			</algorithms>
+			<graphics>
+				<graphicList>
+					<graphic name="residuals" out="1">
+						<K value="10"/>
+						<Kmax value="30"/>
+						<Kmin value="5"/>
+						<alpha value="0.0005"/>
+						<beta value="0.4"/>
+						<beta_reg value="0.75"/>
+						<continous value="1"/>
+						<gamma value="0"/>
+						<iop_blqres value="2"/>
+						<iop_censcalc value="1"/>
+						<iop_colorcens value="1"/>
+						<iop_colorobs value="1"/>
+						<iop_displaybins value="0"/>
+						<iop_displaycens value="1"/>
+						<iop_displayciout value="0"/>
+						<iop_displayciprct value="0"/>
+						<iop_displayemdens value="1"/>
+						<iop_displayemprct value="0"/>
+						<iop_displayhisto value="0"/>
+						<iop_displayobs value="1"/>
+						<iop_displayoutprct value="0"/>
+						<iop_displayspline value="0"/>
+						<iop_displaythdens value="1"/>
+						<iop_displaythprct value="0"/>
+						<iop_gfind value="1"/>
+						<iop_gfobs value="1"/>
+						<iop_gs value="1"/>
+						<iop_legend value="0"/>
+						<level value="90"/>
+						<lmin value="10"/>
+						<nmax value="200"/>
+						<obin value="3"/>
+						<prctile value="3" vector="10,50,90"/>
+						<selectK value="1"/>
+						<select_graphics value="4" vector="1,1,1,0"/>
+						<select_residual value="6" vector="0,1,0,1,1,0"/>
+					</graphic>
+					<graphic name="cvSAEM" out="0">
+						<firstIndividual value="1"/>
+						<nbParam value="100"/>
+					</graphic>
+				</graphicList>
+				<graphicsToPrint>
+					<BLQ value="0"/>
+					<NPC value="0"/>
+					<VPC value="0"/>
+					<bayesian value="0"/>
+					<boxplot value="0"/>
+					<categorizedData value="0"/>
+					<covTable value="0"/>
+					<covariates value="0"/>
+					<cvSAEM value="1"/>
+					<distPsi value="0"/>
+					<fullTimes value="0"/>
+					<indContTable value="0"/>
+					<individualContribution value="0"/>
+					<individualFits value="0"/>
+					<intTimes value="0"/>
+					<jointDist value="0"/>
+					<kaplanMeier value="0"/>
+					<obsTimes value="1"/>
+					<predVsObs value="0"/>
+					<projectSummary value="0"/>
+					<residuals value="0"/>
+					<spaghetti value="0"/>
+					<transProba value="0"/>
+					<vpcPredDist value="0"/>
+				</graphicsToPrint>
+				<version value="420"/>
+			</graphics>
+		</settings>
+	</project>
+</monolix>

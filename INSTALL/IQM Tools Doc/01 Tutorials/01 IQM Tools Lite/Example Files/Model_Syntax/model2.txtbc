@@ -1,0 +1,49 @@
+********** MODEL NAME
+Example: 1 compartment model with nonlinear elimination
+
+********** MODEL NOTES
+Example chemical reaction based model with a single input and a single output.
+The input is on state Ac.
+
+Since INPUT1 is not defined as parameter, during import a parameter INPUT1 
+will be added the model with the default value 0.
+
+It is GOOD MODELING PRACTICE to define the units of the elements here in 
+the notes:
+
+Time unit:   hours
+INPUT unit:  ug
+OUTPUT unit: ng/ml
+
+It is also good modeling practice to annotate the units in the model below.
+
+********** MODEL STATE INFORMATION
+
+
+********** MODEL PARAMETERS
+VMAX   = 1      % (ug/hour) Maximum rate of elimination    
+KM     = 1      % (ng/ml)   At this concentration elimiation rate is half VMAX
+Vc     = 1      % (L)       Central volume   
+INPUT1 = 0.1    % (ug)      Constant input
+F      = 0.6    % (.) 		Bioavailability
+
+********** MODEL VARIABLES
+Cc      = Ac/Vc % (ng/ml) Plasma concentration
+OUTPUT1 = Cc    % (ng/ml) Output variable
+
+********** MODEL REACTIONS
+ => Ac : v_input
+    vf = F*INPUT1
+
+Ac =>  : v_clearance
+    vf = VMAX*Cc/(KM+Ac)
+
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+

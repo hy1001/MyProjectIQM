@@ -1,0 +1,1396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <annotation>
+    <SimBiology xmlns="http://www.mathworks.com">
+      <Version Major="5" Minor="0" Point="0"/>
+    </SimBiology>
+  </annotation>
+  <model id="mw19aff11e_274a_4578_8639_34b270574d75" name="Cobelli&apos;s Glucose-Insulin System">
+    <listOfUnitDefinitions>
+      <unitDefinition id="MWBUILTINUNIT_liter" name="liter">
+        <listOfUnits>
+          <unit kind="metre" exponent="3"/>
+          <unit kind="dimensionless" multiplier="0.001"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram" name="milligram">
+        <listOfUnits>
+          <unit kind="gram" multiplier="0.001"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWBUILTINPREFIX_deci_MWBUILTINUNIT_liter" name="deciliter">
+        <listOfUnits>
+          <unit kind="metre" exponent="3"/>
+          <unit kind="dimensionless" multiplier="0.0001"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWBUILTINPREFIX_pico_MWBUILTINUNIT_mole" name="picomole">
+        <listOfUnits>
+          <unit kind="mole" multiplier="1e-12"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWBUILTINPREFIX_pico_MWBUILTINUNIT_second" name="picosecond">
+        <listOfUnits>
+          <unit kind="second" multiplier="1e-12"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWBUILTINUNIT_hour" name="hour">
+        <listOfUnits>
+          <unit kind="second" multiplier="3600"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_1__milligram" name="1/milligram">
+        <listOfUnits>
+          <unit kind="gram" exponent="-1"/>
+          <unit kind="dimensionless" multiplier="1000"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_1__minute" name="1/minute">
+        <listOfUnits>
+          <unit kind="second" exponent="-1"/>
+          <unit kind="dimensionless" multiplier="0.0166666666666667"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_milligram__minute" name="milligram/minute">
+        <listOfUnits>
+          <unit kind="gram"/>
+          <unit kind="second" exponent="-1"/>
+          <unit kind="dimensionless" multiplier="1.66666666666667e-05"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_milligram__deciliter" name="milligram/deciliter">
+        <listOfUnits>
+          <unit kind="gram"/>
+          <unit kind="metre" exponent="-3"/>
+          <unit kind="dimensionless" multiplier="10"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_milligram__deciliter__minute" name="(milligram/deciliter)/minute">
+        <listOfUnits>
+          <unit kind="gram"/>
+          <unit kind="metre" exponent="-3"/>
+          <unit kind="second" exponent="-1"/>
+          <unit kind="dimensionless" multiplier="0.166666666666667"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_milligram__minute__picomole__liter" name="(milligram/minute)/(picomole/liter)">
+        <listOfUnits>
+          <unit kind="gram"/>
+          <unit kind="metre" exponent="3"/>
+          <unit kind="mole" exponent="-1"/>
+          <unit kind="second" exponent="-1"/>
+          <unit kind="dimensionless" multiplier="16666.6666666667"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_picomole__minute__milligram__deciliter" name="(picomole/minute)/(milligram/deciliter)">
+        <listOfUnits>
+          <unit kind="gram" exponent="-1"/>
+          <unit kind="metre" exponent="3"/>
+          <unit kind="mole"/>
+          <unit kind="second" exponent="-1"/>
+          <unit kind="dimensionless" multiplier="1.66666666666667e-15"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_picomole__minute" name="picomole/minute">
+        <listOfUnits>
+          <unit kind="mole"/>
+          <unit kind="second" exponent="-1"/>
+          <unit kind="dimensionless" multiplier="1.66666666666667e-14"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_picomole__milligram__deciliter" name="picomole/(milligram/deciliter)">
+        <listOfUnits>
+          <unit kind="gram" exponent="-1"/>
+          <unit kind="metre" exponent="3"/>
+          <unit kind="mole"/>
+          <unit kind="dimensionless" multiplier="1e-13"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_picomole__liter" name="picomole/liter">
+        <listOfUnits>
+          <unit kind="metre" exponent="-3"/>
+          <unit kind="mole"/>
+          <unit kind="dimensionless" multiplier="1e-09"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_minute__picomole" name="minute/picomole">
+        <listOfUnits>
+          <unit kind="mole" exponent="-1"/>
+          <unit kind="second"/>
+          <unit kind="dimensionless" multiplier="60000000000000"/>
+        </listOfUnits>
+      </unitDefinition>
+      <unitDefinition id="MWDERIVEDUNIT_milligram__minute__picomole" name="(milligram/minute)/picomole">
+        <listOfUnits>
+          <unit kind="gram"/>
+          <unit kind="mole" exponent="-1"/>
+          <unit kind="second" exponent="-1"/>
+          <unit kind="dimensionless" multiplier="16666666.6666667"/>
+        </listOfUnits>
+      </unitDefinition>
+    </listOfUnitDefinitions>
+    <listOfCompartments>
+      <compartment id="mw988b7627_327b_4cf3_979c_c26536e863f4" name="Glucose appearance" size="1" units="MWBUILTINUNIT_liter"/>
+      <compartment id="mwda2fd37f_72c9_46b8_8794_f006e902931e" name="Insulin secretion" size="1" units="MWBUILTINUNIT_liter"/>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="mwf69d6546_97d6_40f2_a6d3_22bf90490be9" name="Dose" compartment="mw988b7627_327b_4cf3_979c_c26536e863f4" initialAmount="0" substanceUnits="gram" hasOnlySubstanceUnits="true"/>
+      <species id="mw11ab759d_2474_4026_a319_248efd59291e" name="Stomach Glu Solid" compartment="mw988b7627_327b_4cf3_979c_c26536e863f4" initialAmount="0" substanceUnits="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram" hasOnlySubstanceUnits="true"/>
+      <species id="mwaee48007_fb7c_4ac3_86b5_19a69887f4bc" name="Stomach Glu Tritur" compartment="mw988b7627_327b_4cf3_979c_c26536e863f4" initialAmount="0" substanceUnits="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram" hasOnlySubstanceUnits="true"/>
+      <species id="mwa2dedc7c_eba5_45bc_b93f_269e8a4ca60d" name="Stomach Glu" compartment="mw988b7627_327b_4cf3_979c_c26536e863f4" initialAmount="0" substanceUnits="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram" hasOnlySubstanceUnits="true"/>
+      <species id="mwaef10a35_a2cf_439f_ab66_b4768151bdff" name="Gut Glu" compartment="mw988b7627_327b_4cf3_979c_c26536e863f4" initialAmount="0" substanceUnits="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram" hasOnlySubstanceUnits="true"/>
+      <species id="mw8cffdc97_f543_4cae_9430_ef71d8ac8e64" name="Plasma Glu" compartment="mw988b7627_327b_4cf3_979c_c26536e863f4" initialAmount="0" substanceUnits="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram" hasOnlySubstanceUnits="true"/>
+      <species id="mw072c487f_11e0_481a_8750_7360feb3dd95" name="Plasma Glu Conc" compartment="mw988b7627_327b_4cf3_979c_c26536e863f4" initialConcentration="0" substanceUnits="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram">
+        <annotation>
+          <SimBiology xmlns="http://www.mathworks.com">
+            <Unit Numerator="milligram" Denominator="deciliter"/>
+          </SimBiology>
+        </annotation>
+      </species>
+      <species id="mw442e2941_8fd6_4d75_ad7f_ae1c3f0dd58d" name="Tissue Glu" compartment="mw988b7627_327b_4cf3_979c_c26536e863f4" initialAmount="0" substanceUnits="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram" hasOnlySubstanceUnits="true"/>
+      <species id="mwe6d60371_932a_458d_8b5c_c6c3f00fe840" name="Interstitial Ins" compartment="mwda2fd37f_72c9_46b8_8794_f006e902931e" initialConcentration="0" substanceUnits="MWBUILTINPREFIX_pico_MWBUILTINUNIT_mole">
+        <annotation>
+          <SimBiology xmlns="http://www.mathworks.com">
+            <Unit Numerator="picomole" Denominator="liter"/>
+          </SimBiology>
+        </annotation>
+      </species>
+      <species id="mw71d23bd1_6bec_470d_9459_245643a5be44" name="Portal Ins" compartment="mwda2fd37f_72c9_46b8_8794_f006e902931e" initialAmount="0" substanceUnits="MWBUILTINPREFIX_pico_MWBUILTINUNIT_mole" hasOnlySubstanceUnits="true"/>
+      <species id="mwcdc74d11_9e30_41c9_a8b3_cbddeb0b2108" name="Liver Ins" compartment="mwda2fd37f_72c9_46b8_8794_f006e902931e" initialAmount="0" substanceUnits="MWBUILTINPREFIX_pico_MWBUILTINUNIT_mole" hasOnlySubstanceUnits="true"/>
+      <species id="mw34ae54ef_bd82_4a73_b36d_bf8585dd08d0" name="Plasma Ins" compartment="mwda2fd37f_72c9_46b8_8794_f006e902931e" initialAmount="0" substanceUnits="MWBUILTINPREFIX_pico_MWBUILTINUNIT_mole" hasOnlySubstanceUnits="true"/>
+      <species id="mwb609ddbf_076d_4d88_8aa0_7047378e8114" name="Plasma Ins Conc" compartment="mwda2fd37f_72c9_46b8_8794_f006e902931e" initialConcentration="0" substanceUnits="MWBUILTINPREFIX_pico_MWBUILTINUNIT_mole">
+        <annotation>
+          <SimBiology xmlns="http://www.mathworks.com">
+            <Unit Numerator="picomole" Denominator="liter"/>
+          </SimBiology>
+        </annotation>
+      </species>
+      <species id="mwd49ad499_3477_49f3_b9b8_3ee6474db0f6" name="Ins Delay 1" compartment="mwda2fd37f_72c9_46b8_8794_f006e902931e" initialConcentration="0" substanceUnits="MWBUILTINPREFIX_pico_MWBUILTINUNIT_mole">
+        <annotation>
+          <SimBiology xmlns="http://www.mathworks.com">
+            <Unit Numerator="picomole" Denominator="liter"/>
+          </SimBiology>
+        </annotation>
+      </species>
+      <species id="mw905dd21b_c054_4af9_91f4_1e1bc4e79a75" name="Ins Delay 2" compartment="mwda2fd37f_72c9_46b8_8794_f006e902931e" initialConcentration="0" substanceUnits="MWBUILTINPREFIX_pico_MWBUILTINUNIT_mole">
+        <annotation>
+          <SimBiology xmlns="http://www.mathworks.com">
+            <Unit Numerator="picomole" Denominator="liter"/>
+          </SimBiology>
+        </annotation>
+      </species>
+    </listOfSpecies>
+    <listOfParameters>
+      <parameter id="mw9783e59d_fce7_4f9b_afc9_9a590ff78ab9" name="timeSmall" value="1" units="MWBUILTINPREFIX_pico_MWBUILTINUNIT_second"/>
+      <parameter id="mw66c22ac2_d8ef_4b0c_adfc_1def7604ccba" name="timeEveningMeal" value="20" units="MWBUILTINUNIT_hour"/>
+      <parameter id="mwb5a1b99d_46fd_4bba_a14c_797059e4fca2" name="timeLunch" value="12" units="MWBUILTINUNIT_hour"/>
+      <parameter id="mwab43d34d_bd16_4287_beef_6d2a31a8dfab" name="Stomach Glu After Dosing" value="78" units="gram" constant="false"/>
+      <parameter id="mwfdd8903f_4511_4a95_91e1_08eac3816ace" name="a" value="0" units="MWDERIVEDUNIT_1__milligram" constant="false"/>
+      <parameter id="mw0368ec6f_dcb8_44fb_b030_04227c8f2289" name="b" value="0.82" units="dimensionless"/>
+      <parameter id="mw2cf3534b_6b9e_421b_a288_87438d361d1a" name="c" value="0" units="MWDERIVEDUNIT_1__milligram" constant="false"/>
+      <parameter id="mw9e8c1611_d330_4410_8afa_b557ee6ae518" name="d" value="0.01" units="dimensionless"/>
+      <parameter id="mwb2027692_1989_4211_94ea_337e07bdb088" name="kempt" value="0" units="MWDERIVEDUNIT_1__minute" constant="false"/>
+      <parameter id="mwd6f8c386_6d83_49d5_9c1b_0f16980532e4" name="kmin" value="0.008" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mw20ec8b23_938d_4aa1_8268_8cf72b59745c" name="kmax" value="0.0558" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mw4ce98f9a_2281_4834_9a89_b631d9638328" name="kgri" value="0" units="MWDERIVEDUNIT_1__minute" constant="false"/>
+      <parameter id="mw51ba539c_e609_464d_b42f_cf3324940bf9" name="kabs" value="0.0568" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mw94f52524_ba75_4fb7_b6c1_c8d04e9b860e" name="Glu Appear Rate" value="0" units="MWDERIVEDUNIT_milligram__minute" constant="false">
+        <notes>
+          <body xmlns="http://www.w3.org/1999/xhtml">Glucose rate of appearance</body>
+        </notes>
+      </parameter>
+      <parameter id="mw51bdd844_a3f5_4fc2_a31e_7e5db239ca6c" name="f" value="0.9" units="dimensionless"/>
+      <parameter id="mwbf1c0096_12ec_4a1d_ba60_83ad6da45aef" name="basis" value="1" units="kilogram"/>
+      <parameter id="mw4d12f1d7_6b8e_4405_a799_0f9818e2c14d" name="Body Weight" value="78" units="kilogram"/>
+      <parameter id="mwb4c6a4b2_bb87_4546_b199_1bf617bdce6d" name="k1" value="0.065" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mw3a9ddf79_1e51_4b29_9a86_ac6a669cf8a0" name="k2" value="0.079" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mw36729140_6d40_41a9_9f14_17348afaf8b2" name="Glu Prod" value="1" units="MWDERIVEDUNIT_milligram__minute" constant="false"/>
+      <parameter id="mw78c37feb_f2bd_4882_9f6e_c276a9cebc80" name="Basal Plasma Glu Conc" value="91.76" units="MWDERIVEDUNIT_milligram__deciliter"/>
+      <parameter id="mw77fea9d2_cd94_48b5_b246_48b8cd7006ab" name="Plasma Glu Conc Rate" value="0" units="MWDERIVEDUNIT_milligram__deciliter__minute" constant="false"/>
+      <parameter id="mw76ab6b98_6727_4f83_9c44_21320aa60198" name="Plasma Volume (Glu)" value="1.88" units="MWBUILTINPREFIX_deci_MWBUILTINUNIT_liter"/>
+      <parameter id="mw0da19465_44ba_4be5_a681_e27e0e667fa0" name="Ins Ind Glu Util" value="1" units="MWDERIVEDUNIT_milligram__minute">
+        <notes>
+          <body xmlns="http://www.w3.org/1999/xhtml">Insulin-independent utilization by CNS</body>
+        </notes>
+      </parameter>
+      <parameter id="mw85daa124_4cbf_478a_a7e5_ef0e2aa3460e" name="Ins Dep Glu Util" value="0" units="MWDERIVEDUNIT_milligram__minute" constant="false"/>
+      <parameter id="mwe6d23c64_62f9_4889_8465_ad8fa8d62cb7" name="Glu Util" value="0" units="MWDERIVEDUNIT_milligram__minute" constant="false">
+        <notes>
+          <body xmlns="http://www.w3.org/1999/xhtml">Insulin-independent utilization by CNS</body>
+        </notes>
+      </parameter>
+      <parameter id="mwfab3ca5b_01c6_42ed_97e3_89e7c6ff349d" name="Glu Excretion" value="0" units="MWDERIVEDUNIT_milligram__minute" constant="false">
+        <notes>
+          <body xmlns="http://www.w3.org/1999/xhtml">Renal excretion rate of glucose</body>
+        </notes>
+      </parameter>
+      <parameter id="mw8e78e838_18fa_47c8_9e8b_b7e1473b07a1" name="Glu Excretion Mode" value="1" units="dimensionless" constant="false"/>
+      <parameter id="mwe73647d1_30d0_40dc_8c61_96f9d9008327" name="ke1" value="0.0005" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mw18903375_d31f_412f_a9df_300585441cb4" name="ke2" value="339" units="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram"/>
+      <parameter id="mw1c4fb8ed_d446_4d18_9816_9e464bb1c634" name="Vm" value="0" units="MWDERIVEDUNIT_milligram__minute" constant="false"/>
+      <parameter id="mw109737c4_d0e5_41c5_9cc1_a277d1885628" name="Vm0" value="2.5129" units="MWDERIVEDUNIT_milligram__minute"/>
+      <parameter id="mwd156b780_977b_44b9_8fed_085c32c892b1" name="Vmx" value="0.047" units="MWDERIVEDUNIT_milligram__minute__picomole__liter" constant="false"/>
+      <parameter id="mwcc5b1b06_45ed_4a92_96d0_d06fb654f84f" name="Km" value="225.59" units="MWBUILTINPREFIX_milli_MWBUILTINUNIT_gram"/>
+      <parameter id="mw42b99f3e_52c9_4b6c_b5d9_c6e047e8ef40" name="alpha" value="0.05" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mw529076be_117c_48a7_b6fd_341975ebc306" name="beta" value="0.11" units="MWDERIVEDUNIT_picomole__minute__milligram__deciliter" constant="false"/>
+      <parameter id="mwd1db500b_5f90_4297_86a7_cf1cf3525ada" name="Delayed Glu Signal" value="0" units="MWDERIVEDUNIT_picomole__minute" constant="false">
+        <notes>
+          <body xmlns="http://www.w3.org/1999/xhtml">Delayed glucose signal for insulin secretion</body>
+        </notes>
+      </parameter>
+      <parameter id="mw8d5e0f6d_c410_4cf5_9f79_7047ebc80511" name="Delayed Glu Signal Mode" value="1" units="dimensionless" constant="false"/>
+      <parameter id="mw44c226a4_9a02_4294_b90c_4e329380afac" name="K" value="2.28" units="MWDERIVEDUNIT_picomole__milligram__deciliter"/>
+      <parameter id="mwa10a59b4_bc2c_4e38_8a47_393b97f8b7b3" name="Ins Prod" value="0" units="MWDERIVEDUNIT_picomole__minute" constant="false"/>
+      <parameter id="mw936afe30_3547_4fc9_a4e4_db23aa1b8802" name="Ins Prod Mode" value="1" units="dimensionless" constant="false"/>
+      <parameter id="mw924b92ce_7e0f_444b_8d40_13e8d1e9d6e3" name="Ins Secr" value="0" units="MWDERIVEDUNIT_picomole__minute" constant="false"/>
+      <parameter id="mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2" name="Basal Ins Secr" value="0" units="MWDERIVEDUNIT_picomole__minute" constant="false"/>
+      <parameter id="mwda65984d_df11_40de_89bb_401e41fed5a3" name="Basal Plasma Ins Conc" value="25.49" units="MWDERIVEDUNIT_picomole__liter"/>
+      <parameter id="mwb4ea4e04_aa21_4489_8424_8458fac09f2a" name="m1" value="0.19" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mw6f8c75ee_d9c0_4510_af55_00128c4070c1" name="m2" value="0.484" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mw18182cbe_0998_4158_b294_7d879af9e111" name="m3" value="0" units="MWDERIVEDUNIT_1__minute" constant="false"/>
+      <parameter id="mw45266104_284c_4d8b_8d87_fbe82d560b0c" name="m4" value="0.1936" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mwf9222be1_a97c_496e_9923_80f0cd64aee3" name="m5" value="0.0304" units="MWDERIVEDUNIT_minute__picomole"/>
+      <parameter id="mwdaa1107a_23e6_4c75_8880_5761fe9cc363" name="m6" value="0.6469" units="dimensionless"/>
+      <parameter id="mw3c9b7b1b_5b2a_4816_9632_ae56c723698b" name="Hepatic Extraction" value="0.6" units="dimensionless" constant="false"/>
+      <parameter id="mw64b3c685_65cd_4853_be01_1284cca963b2" name="Plasma Volume (Ins)" value="0.05" units="MWBUILTINUNIT_liter"/>
+      <parameter id="mwd802e6ad_74ec_4b30_af0c_afcac7089366" name="ki" value="0.0079" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mwb3d99947_23af_4da8_9a29_9c59dd9851e0" name="p2U" value="0.0331" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mwa87b912b_46dc_452d_8411_fef6a4a00a08" name="gamma" value="0.5" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mwa62fd814_267b_4fc1_a0b9_7b3286b8f806" name="Basal Glu Prod" value="1" units="MWDERIVEDUNIT_milligram__minute" constant="false"/>
+      <parameter id="mwdf466cfb_d9a5_4674_9e35_70576d746d6f" name="kp1" value="2.7" units="MWDERIVEDUNIT_milligram__minute"/>
+      <parameter id="mw1eec4238_d108_46b0_a5a9_7ffcc254bc1b" name="kp2" value="0.0021" units="MWDERIVEDUNIT_1__minute"/>
+      <parameter id="mwa465b7cd_ab32_4360_a24b_283d52ed3112" name="kp3" value="0.009" units="MWDERIVEDUNIT_milligram__minute__picomole__liter"/>
+      <parameter id="mw89c18b4f_eafa_418e_879e_8b500d216894" name="kp4" value="0.0618" units="MWDERIVEDUNIT_milligram__minute__picomole"/>
+    </listOfParameters>
+    <listOfInitialAssignments>
+      <initialAssignment symbol="mwfdd8903f_4511_4a95_91e1_08eac3816ace">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <cn type="integer"> 5 </cn>
+            <apply>
+              <times/>
+              <cn type="integer"> 2 </cn>
+              <ci> mwab43d34d_bd16_4287_beef_6d2a31a8dfab </ci>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> mw0368ec6f_dcb8_44fb_b030_04227c8f2289 </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw2cf3534b_6b9e_421b_a288_87438d361d1a">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <cn type="integer"> 5 </cn>
+            <apply>
+              <times/>
+              <cn type="integer"> 2 </cn>
+              <ci> mwab43d34d_bd16_4287_beef_6d2a31a8dfab </ci>
+              <ci> mw9e8c1611_d330_4410_8afa_b557ee6ae518 </ci>
+            </apply>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw4ce98f9a_2281_4834_9a89_b631d9638328">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> mw20ec8b23_938d_4aa1_8268_8cf72b59745c </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <minus/>
+              <ci> mwdaa1107a_23e6_4c75_8880_5761fe9cc363 </ci>
+              <ci> mw3c9b7b1b_5b2a_4816_9632_ae56c723698b </ci>
+            </apply>
+            <ci> mwf9222be1_a97c_496e_9923_80f0cd64aee3 </ci>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw34ae54ef_bd82_4a73_b36d_bf8585dd08d0">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <apply>
+                  <divide/>
+                  <cn type="integer"> 2 </cn>
+                  <cn type="integer"> 5 </cn>
+                </apply>
+                <ci> mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2 </ci>
+              </apply>
+              <ci> mw45266104_284c_4d8b_8d87_fbe82d560b0c </ci>
+            </apply>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> mw3c9b7b1b_5b2a_4816_9632_ae56c723698b </ci>
+            </apply>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mwcdc74d11_9e30_41c9_a8b3_cbddeb0b2108">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <minus/>
+              <ci> mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2 </ci>
+              <apply>
+                <times/>
+                <ci> mw45266104_284c_4d8b_8d87_fbe82d560b0c </ci>
+                <ci> mw34ae54ef_bd82_4a73_b36d_bf8585dd08d0 </ci>
+              </apply>
+            </apply>
+            <apply>
+              <divide/>
+              <apply>
+                <times/>
+                <ci> mw3c9b7b1b_5b2a_4816_9632_ae56c723698b </ci>
+                <ci> mwb4ea4e04_aa21_4489_8424_8458fac09f2a </ci>
+              </apply>
+              <apply>
+                <minus/>
+                <cn type="integer"> 1 </cn>
+                <ci> mw3c9b7b1b_5b2a_4816_9632_ae56c723698b </ci>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mwd49ad499_3477_49f3_b9b8_3ee6474db0f6">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> mwda65984d_df11_40de_89bb_401e41fed5a3 </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw905dd21b_c054_4af9_91f4_1e1bc4e79a75">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> mwda65984d_df11_40de_89bb_401e41fed5a3 </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw71d23bd1_6bec_470d_9459_245643a5be44">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2 </ci>
+            <ci> mwa87b912b_46dc_452d_8411_fef6a4a00a08 </ci>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw072c487f_11e0_481a_8750_7360feb3dd95">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> mw78c37feb_f2bd_4882_9f6e_c276a9cebc80 </ci>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw8cffdc97_f543_4cae_9430_ef71d8ac8e64">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> mw78c37feb_f2bd_4882_9f6e_c276a9cebc80 </ci>
+            <ci> mw76ab6b98_6727_4f83_9c44_21320aa60198 </ci>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mwa62fd814_267b_4fc1_a0b9_7b3286b8f806">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <minus/>
+              <apply>
+                <minus/>
+                <ci> mwdf466cfb_d9a5_4674_9e35_70576d746d6f </ci>
+                <apply>
+                  <times/>
+                  <ci> mw1eec4238_d108_46b0_a5a9_7ffcc254bc1b </ci>
+                  <ci> mw8cffdc97_f543_4cae_9430_ef71d8ac8e64 </ci>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <ci> mwa465b7cd_ab32_4360_a24b_283d52ed3112 </ci>
+                <ci> mw905dd21b_c054_4af9_91f4_1e1bc4e79a75 </ci>
+              </apply>
+            </apply>
+            <apply>
+              <times/>
+              <ci> mw89c18b4f_eafa_418e_879e_8b500d216894 </ci>
+              <ci> mw71d23bd1_6bec_470d_9459_245643a5be44 </ci>
+            </apply>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw442e2941_8fd6_4d75_ad7f_ae1c3f0dd58d">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <ci> mw0da19465_44ba_4be5_a681_e27e0e667fa0 </ci>
+                <ci> mwa62fd814_267b_4fc1_a0b9_7b3286b8f806 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> mwb4c6a4b2_bb87_4546_b199_1bf617bdce6d </ci>
+                <ci> mw8cffdc97_f543_4cae_9430_ef71d8ac8e64 </ci>
+              </apply>
+            </apply>
+            <ci> mw3a9ddf79_1e51_4b29_9a86_ac6a669cf8a0 </ci>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw936afe30_3547_4fc9_a4e4_db23aa1b8802">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <and/>
+            <apply>
+              <gt/>
+              <ci> mw77fea9d2_cd94_48b5_b246_48b8cd7006ab </ci>
+              <apply>
+                <times/>
+                <cn type="integer"> 0 </cn>
+                <ci> mw77fea9d2_cd94_48b5_b246_48b8cd7006ab </ci>
+              </apply>
+            </apply>
+            <apply>
+              <gt/>
+              <ci> mw072c487f_11e0_481a_8750_7360feb3dd95 </ci>
+              <ci> mw78c37feb_f2bd_4882_9f6e_c276a9cebc80 </ci>
+            </apply>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw8d5e0f6d_c410_4cf5_9f79_7047ebc80511">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <geq/>
+            <apply>
+              <times/>
+              <ci> mw529076be_117c_48a7_b6fd_341975ebc306 </ci>
+              <apply>
+                <minus/>
+                <ci> mw072c487f_11e0_481a_8750_7360feb3dd95 </ci>
+                <ci> mw78c37feb_f2bd_4882_9f6e_c276a9cebc80 </ci>
+              </apply>
+            </apply>
+            <apply>
+              <minus/>
+              <ci> mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2 </ci>
+            </apply>
+          </apply>
+        </math>
+      </initialAssignment>
+      <initialAssignment symbol="mw8e78e838_18fa_47c8_9e8b_b7e1473b07a1">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <gt/>
+            <ci> mw8cffdc97_f543_4cae_9430_ef71d8ac8e64 </ci>
+            <ci> mw18903375_d31f_412f_a9df_300585441cb4 </ci>
+          </apply>
+        </math>
+      </initialAssignment>
+    </listOfInitialAssignments>
+    <listOfRules>
+      <assignmentRule variable="mwa2dedc7c_eba5_45bc_b93f_269e8a4ca60d">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> mw11ab759d_2474_4026_a319_248efd59291e </ci>
+            <ci> mwaee48007_fb7c_4ac3_86b5_19a69887f4bc </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mw36729140_6d40_41a9_9f14_17348afaf8b2">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <minus/>
+            <apply>
+              <minus/>
+              <apply>
+                <minus/>
+                <ci> mwdf466cfb_d9a5_4674_9e35_70576d746d6f </ci>
+                <apply>
+                  <times/>
+                  <ci> mw1eec4238_d108_46b0_a5a9_7ffcc254bc1b </ci>
+                  <ci> mw8cffdc97_f543_4cae_9430_ef71d8ac8e64 </ci>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <ci> mwa465b7cd_ab32_4360_a24b_283d52ed3112 </ci>
+                <ci> mw905dd21b_c054_4af9_91f4_1e1bc4e79a75 </ci>
+              </apply>
+            </apply>
+            <apply>
+              <times/>
+              <ci> mw89c18b4f_eafa_418e_879e_8b500d216894 </ci>
+              <ci> mw71d23bd1_6bec_470d_9459_245643a5be44 </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mwb2027692_1989_4211_94ea_337e07bdb088">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> mwd6f8c386_6d83_49d5_9c1b_0f16980532e4 </ci>
+            <apply>
+              <times/>
+              <cn> 0.5 </cn>
+              <apply>
+                <minus/>
+                <ci> mw20ec8b23_938d_4aa1_8268_8cf72b59745c </ci>
+                <ci> mwd6f8c386_6d83_49d5_9c1b_0f16980532e4 </ci>
+              </apply>
+              <apply>
+                <plus/>
+                <apply>
+                  <minus/>
+                  <apply>
+                    <tanh/>
+                    <apply>
+                      <times/>
+                      <ci> mwfdd8903f_4511_4a95_91e1_08eac3816ace </ci>
+                      <apply>
+                        <minus/>
+                        <ci> mwa2dedc7c_eba5_45bc_b93f_269e8a4ca60d </ci>
+                        <apply>
+                          <times/>
+                          <ci> mw0368ec6f_dcb8_44fb_b030_04227c8f2289 </ci>
+                          <ci> mwab43d34d_bd16_4287_beef_6d2a31a8dfab </ci>
+                        </apply>
+                      </apply>
+                    </apply>
+                  </apply>
+                  <apply>
+                    <tanh/>
+                    <apply>
+                      <times/>
+                      <ci> mw2cf3534b_6b9e_421b_a288_87438d361d1a </ci>
+                      <apply>
+                        <minus/>
+                        <ci> mwa2dedc7c_eba5_45bc_b93f_269e8a4ca60d </ci>
+                        <apply>
+                          <times/>
+                          <ci> mw9e8c1611_d330_4410_8afa_b557ee6ae518 </ci>
+                          <ci> mwab43d34d_bd16_4287_beef_6d2a31a8dfab </ci>
+                        </apply>
+                      </apply>
+                    </apply>
+                  </apply>
+                </apply>
+                <cn type="integer"> 2 </cn>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mw94f52524_ba75_4fb7_b6c1_c8d04e9b860e">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> mw51bdd844_a3f5_4fc2_a31e_7e5db239ca6c </ci>
+            <ci> mw51ba539c_e609_464d_b42f_cf3324940bf9 </ci>
+            <ci> mwaef10a35_a2cf_439f_ab66_b4768151bdff </ci>
+            <apply>
+              <divide/>
+              <ci> mwbf1c0096_12ec_4a1d_ba60_83ad6da45aef </ci>
+              <ci> mw4d12f1d7_6b8e_4405_a799_0f9818e2c14d </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mw1c4fb8ed_d446_4d18_9816_9e464bb1c634">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> mw109737c4_d0e5_41c5_9cc1_a277d1885628 </ci>
+            <apply>
+              <times/>
+              <ci> mwd156b780_977b_44b9_8fed_085c32c892b1 </ci>
+              <ci> mwe6d60371_932a_458d_8b5c_c6c3f00fe840 </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mw85daa124_4cbf_478a_a7e5_ef0e2aa3460e">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> mw1c4fb8ed_d446_4d18_9816_9e464bb1c634 </ci>
+              <ci> mw442e2941_8fd6_4d75_ad7f_ae1c3f0dd58d </ci>
+            </apply>
+            <apply>
+              <plus/>
+              <ci> mwcc5b1b06_45ed_4a92_96d0_d06fb654f84f </ci>
+              <ci> mw442e2941_8fd6_4d75_ad7f_ae1c3f0dd58d </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mwfab3ca5b_01c6_42ed_97e3_89e7c6ff349d">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <eq/>
+              <ci> mw8e78e838_18fa_47c8_9e8b_b7e1473b07a1 </ci>
+              <cn type="integer"> 1 </cn>
+            </apply>
+            <ci> mwe73647d1_30d0_40dc_8c61_96f9d9008327 </ci>
+            <apply>
+              <minus/>
+              <ci> mw8cffdc97_f543_4cae_9430_ef71d8ac8e64 </ci>
+              <ci> mw18903375_d31f_412f_a9df_300585441cb4 </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mw77fea9d2_cd94_48b5_b246_48b8cd7006ab">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <plus/>
+              <apply>
+                <minus/>
+                <apply>
+                  <minus/>
+                  <apply>
+                    <minus/>
+                    <apply>
+                      <plus/>
+                      <ci> mw36729140_6d40_41a9_9f14_17348afaf8b2 </ci>
+                      <ci> mw94f52524_ba75_4fb7_b6c1_c8d04e9b860e </ci>
+                    </apply>
+                    <ci> mw0da19465_44ba_4be5_a681_e27e0e667fa0 </ci>
+                  </apply>
+                  <ci> mwfab3ca5b_01c6_42ed_97e3_89e7c6ff349d </ci>
+                </apply>
+                <apply>
+                  <times/>
+                  <ci> mwb4c6a4b2_bb87_4546_b199_1bf617bdce6d </ci>
+                  <ci> mw8cffdc97_f543_4cae_9430_ef71d8ac8e64 </ci>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <ci> mw3a9ddf79_1e51_4b29_9a86_ac6a669cf8a0 </ci>
+                <ci> mw442e2941_8fd6_4d75_ad7f_ae1c3f0dd58d </ci>
+              </apply>
+            </apply>
+            <ci> mw76ab6b98_6727_4f83_9c44_21320aa60198 </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mwa10a59b4_bc2c_4e38_8a47_393b97f8b7b3">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> mwd1db500b_5f90_4297_86a7_cf1cf3525ada </ci>
+            <ci> mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2 </ci>
+            <apply>
+              <times/>
+              <apply>
+                <eq/>
+                <ci> mw936afe30_3547_4fc9_a4e4_db23aa1b8802 </ci>
+                <cn type="integer"> 1 </cn>
+              </apply>
+              <ci> mw44c226a4_9a02_4294_b90c_4e329380afac </ci>
+              <ci> mw77fea9d2_cd94_48b5_b246_48b8cd7006ab </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mw924b92ce_7e0f_444b_8d40_13e8d1e9d6e3">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <ci> mwa87b912b_46dc_452d_8411_fef6a4a00a08 </ci>
+            <ci> mw71d23bd1_6bec_470d_9459_245643a5be44 </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mw3c9b7b1b_5b2a_4816_9632_ae56c723698b">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <apply>
+              <times/>
+              <apply>
+                <minus/>
+                <ci> mwf9222be1_a97c_496e_9923_80f0cd64aee3 </ci>
+              </apply>
+              <ci> mw924b92ce_7e0f_444b_8d40_13e8d1e9d6e3 </ci>
+            </apply>
+            <ci> mwdaa1107a_23e6_4c75_8880_5761fe9cc363 </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mw18182cbe_0998_4158_b294_7d879af9e111">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <apply>
+              <times/>
+              <ci> mw3c9b7b1b_5b2a_4816_9632_ae56c723698b </ci>
+              <ci> mwb4ea4e04_aa21_4489_8424_8458fac09f2a </ci>
+            </apply>
+            <apply>
+              <minus/>
+              <cn type="integer"> 1 </cn>
+              <ci> mw3c9b7b1b_5b2a_4816_9632_ae56c723698b </ci>
+            </apply>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mwb609ddbf_076d_4d88_8aa0_7047378e8114">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <divide/>
+            <ci> mw34ae54ef_bd82_4a73_b36d_bf8585dd08d0 </ci>
+            <ci> mw64b3c685_65cd_4853_be01_1284cca963b2 </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <assignmentRule variable="mwe6d23c64_62f9_4889_8465_ad8fa8d62cb7">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <plus/>
+            <ci> mw0da19465_44ba_4be5_a681_e27e0e667fa0 </ci>
+            <ci> mw85daa124_4cbf_478a_a7e5_ef0e2aa3460e </ci>
+          </apply>
+        </math>
+      </assignmentRule>
+      <rateRule variable="mwd1db500b_5f90_4297_86a7_cf1cf3525ada">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <apply>
+            <times/>
+            <apply>
+              <minus/>
+              <ci> mw42b99f3e_52c9_4b6c_b5d9_c6e047e8ef40 </ci>
+            </apply>
+            <apply>
+              <minus/>
+              <apply>
+                <plus/>
+                <ci> mwd1db500b_5f90_4297_86a7_cf1cf3525ada </ci>
+                <apply>
+                  <times/>
+                  <apply>
+                    <eq/>
+                    <ci> mw8d5e0f6d_c410_4cf5_9f79_7047ebc80511 </ci>
+                    <cn type="integer"> 0 </cn>
+                  </apply>
+                  <ci> mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2 </ci>
+                </apply>
+              </apply>
+              <apply>
+                <times/>
+                <apply>
+                  <eq/>
+                  <ci> mw8d5e0f6d_c410_4cf5_9f79_7047ebc80511 </ci>
+                  <cn type="integer"> 1 </cn>
+                </apply>
+                <ci> mw529076be_117c_48a7_b6fd_341975ebc306 </ci>
+                <apply>
+                  <minus/>
+                  <ci> mw072c487f_11e0_481a_8750_7360feb3dd95 </ci>
+                  <ci> mw78c37feb_f2bd_4882_9f6e_c276a9cebc80 </ci>
+                </apply>
+              </apply>
+            </apply>
+          </apply>
+        </math>
+      </rateRule>
+      <rateRule variable="mw072c487f_11e0_481a_8750_7360feb3dd95">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <ci> mw77fea9d2_cd94_48b5_b246_48b8cd7006ab </ci>
+        </math>
+      </rateRule>
+    </listOfRules>
+    <listOfReactions>
+      <reaction id="mw4550c1a2_1e40_4500_b732_df2a2d123e43" name="Grinding" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mw11ab759d_2474_4026_a319_248efd59291e"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mwaee48007_fb7c_4ac3_86b5_19a69887f4bc"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mw4ce98f9a_2281_4834_9a89_b631d9638328 </ci>
+              <ci> mw11ab759d_2474_4026_a319_248efd59291e </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw3cca4455_fc81_4992_8340_67bcedfc8d02" name="Emptying" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mwaee48007_fb7c_4ac3_86b5_19a69887f4bc"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mwaef10a35_a2cf_439f_ab66_b4768151bdff"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mwb2027692_1989_4211_94ea_337e07bdb088 </ci>
+              <ci> mwaee48007_fb7c_4ac3_86b5_19a69887f4bc </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw90e5417a_86c1_474f_8c25_f44519a8c284" name="Intestinal absorption" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mwaef10a35_a2cf_439f_ab66_b4768151bdff"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mw51ba539c_e609_464d_b42f_cf3324940bf9 </ci>
+              <ci> mwaef10a35_a2cf_439f_ab66_b4768151bdff </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw8ffc6881_6c1b_49bd_97e4_2e26e893fb17" name="Appearance" reversible="false" fast="false">
+        <listOfProducts>
+          <speciesReference species="mw8cffdc97_f543_4cae_9430_ef71d8ac8e64"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> mw94f52524_ba75_4fb7_b6c1_c8d04e9b860e </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw5fd51be4_5cd1_41cf_a80a_550473646676" name="Plasma-tissue glucose transport" fast="false">
+        <listOfReactants>
+          <speciesReference species="mw8cffdc97_f543_4cae_9430_ef71d8ac8e64"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mw442e2941_8fd6_4d75_ad7f_ae1c3f0dd58d"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> mwb4c6a4b2_bb87_4546_b199_1bf617bdce6d </ci>
+                <ci> mw8cffdc97_f543_4cae_9430_ef71d8ac8e64 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> mw3a9ddf79_1e51_4b29_9a86_ac6a669cf8a0 </ci>
+                <ci> mw442e2941_8fd6_4d75_ad7f_ae1c3f0dd58d </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw9e6146bd_36b3_4186_ab7e_069db3e5e0c6" name="Endogenous" reversible="false" fast="false">
+        <listOfProducts>
+          <speciesReference species="mw8cffdc97_f543_4cae_9430_ef71d8ac8e64"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> mw36729140_6d40_41a9_9f14_17348afaf8b2 </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw65f65a1a_892e_40e3_9bdb_402b0858d1ae" name="Insulin-dep. util." reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mw442e2941_8fd6_4d75_ad7f_ae1c3f0dd58d"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> mw85daa124_4cbf_478a_a7e5_ef0e2aa3460e </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw88d0a35d_ab76_4663_adab_3b9fe27074f9" name="Insulin-indep. util." reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mw8cffdc97_f543_4cae_9430_ef71d8ac8e64"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> mw0da19465_44ba_4be5_a681_e27e0e667fa0 </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mwb090bd1d_961b_4ae4_93c4_866295706cd4" name="Renal excretion" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mw8cffdc97_f543_4cae_9430_ef71d8ac8e64"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> mwfab3ca5b_01c6_42ed_97e3_89e7c6ff349d </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mwfe3bf229_c3ad_43fa_9c83_bfcce6db7172" name="Production" reversible="false" fast="false">
+        <listOfProducts>
+          <speciesReference species="mw71d23bd1_6bec_470d_9459_245643a5be44"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> mwa10a59b4_bc2c_4e38_8a47_393b97f8b7b3 </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw90150d31_0be2_4163_9736_d30cf6a41084" name="Secretion" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mw71d23bd1_6bec_470d_9459_245643a5be44"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mwcdc74d11_9e30_41c9_a8b3_cbddeb0b2108"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> mw924b92ce_7e0f_444b_8d40_13e8d1e9d6e3 </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mwd2e5c4b5_fc97_4831_84c5_510e82569e16" name="Transport" fast="false">
+        <listOfReactants>
+          <speciesReference species="mwcdc74d11_9e30_41c9_a8b3_cbddeb0b2108"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mw34ae54ef_bd82_4a73_b36d_bf8585dd08d0"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <minus/>
+              <apply>
+                <times/>
+                <ci> mwb4ea4e04_aa21_4489_8424_8458fac09f2a </ci>
+                <ci> mwcdc74d11_9e30_41c9_a8b3_cbddeb0b2108 </ci>
+              </apply>
+              <apply>
+                <times/>
+                <ci> mw6f8c75ee_d9c0_4510_af55_00128c4070c1 </ci>
+                <ci> mw34ae54ef_bd82_4a73_b36d_bf8585dd08d0 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw9853a4b7_a5b1_457f_8d65_2a2a69b3cdfc" name="Liver degradation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mwcdc74d11_9e30_41c9_a8b3_cbddeb0b2108"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mw18182cbe_0998_4158_b294_7d879af9e111 </ci>
+              <ci> mwcdc74d11_9e30_41c9_a8b3_cbddeb0b2108 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw0d23b9ab_db5b_41ea_b678_e86a9a91b37a" name="Plasma degradation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mw34ae54ef_bd82_4a73_b36d_bf8585dd08d0"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mw45266104_284c_4d8b_8d87_fbe82d560b0c </ci>
+              <ci> mw34ae54ef_bd82_4a73_b36d_bf8585dd08d0 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mwcf728a60_a6c2_4731_8650_2909231a4892" name="Ins delay 1" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mwb609ddbf_076d_4d88_8aa0_7047378e8114"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mwd49ad499_3477_49f3_b9b8_3ee6474db0f6"/>
+          <speciesReference species="mwb609ddbf_076d_4d88_8aa0_7047378e8114"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mwd802e6ad_74ec_4b30_af0c_afcac7089366 </ci>
+              <ci> mwb609ddbf_076d_4d88_8aa0_7047378e8114 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw142bf64f_f533_44ec_acc1_a3464e83871f" name="Interstitial transport" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mwb609ddbf_076d_4d88_8aa0_7047378e8114"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mwe6d60371_932a_458d_8b5c_c6c3f00fe840"/>
+          <speciesReference species="mwb609ddbf_076d_4d88_8aa0_7047378e8114"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mwb3d99947_23af_4da8_9a29_9c59dd9851e0 </ci>
+              <apply>
+                <minus/>
+                <ci> mwb609ddbf_076d_4d88_8aa0_7047378e8114 </ci>
+                <ci> mwda65984d_df11_40de_89bb_401e41fed5a3 </ci>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mwd7ee08bc_9230_4535_b0a3_f935a52303c0" name="Interstitial degradation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mwe6d60371_932a_458d_8b5c_c6c3f00fe840"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mwb3d99947_23af_4da8_9a29_9c59dd9851e0 </ci>
+              <ci> mwe6d60371_932a_458d_8b5c_c6c3f00fe840 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mw0320d8da_8064_41d0_9206_6c986350ca63" name="Ins delay 2" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mwd49ad499_3477_49f3_b9b8_3ee6474db0f6"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="mw905dd21b_c054_4af9_91f4_1e1bc4e79a75"/>
+        </listOfProducts>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mwd802e6ad_74ec_4b30_af0c_afcac7089366 </ci>
+              <ci> mwd49ad499_3477_49f3_b9b8_3ee6474db0f6 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="mwcf2726aa_cb61_4790_b5cf_3e9e55721814" name="Ins delay degradation" reversible="false" fast="false">
+        <listOfReactants>
+          <speciesReference species="mw905dd21b_c054_4af9_91f4_1e1bc4e79a75"/>
+        </listOfReactants>
+        <kineticLaw>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <times/>
+              <ci> mwd802e6ad_74ec_4b30_af0c_afcac7089366 </ci>
+              <ci> mw905dd21b_c054_4af9_91f4_1e1bc4e79a75 </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+    <listOfEvents>
+      <event id="mweef7a81b_138f_4e4a_a50a_5942f99bf51c" name="Apply dose">
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <and/>
+              <apply>
+                <gt/>
+                <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+                <ci> mw9783e59d_fce7_4f9b_afc9_9a590ff78ab9 </ci>
+              </apply>
+              <apply>
+                <gt/>
+                <ci> mwf69d6546_97d6_40f2_a6d3_22bf90490be9 </ci>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 0 </cn>
+                  <ci> mwf69d6546_97d6_40f2_a6d3_22bf90490be9 </ci>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="mwab43d34d_bd16_4287_beef_6d2a31a8dfab">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <apply>
+                <plus/>
+                <ci> mwf69d6546_97d6_40f2_a6d3_22bf90490be9 </ci>
+                <ci> mwa2dedc7c_eba5_45bc_b93f_269e8a4ca60d </ci>
+              </apply>
+            </math>
+          </eventAssignment>
+          <eventAssignment variable="mw11ab759d_2474_4026_a319_248efd59291e">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <apply>
+                <plus/>
+                <ci> mw11ab759d_2474_4026_a319_248efd59291e </ci>
+                <ci> mwf69d6546_97d6_40f2_a6d3_22bf90490be9 </ci>
+              </apply>
+            </math>
+          </eventAssignment>
+          <eventAssignment variable="mwf69d6546_97d6_40f2_a6d3_22bf90490be9">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <apply>
+                <times/>
+                <cn type="integer"> 0 </cn>
+                <ci> mwf69d6546_97d6_40f2_a6d3_22bf90490be9 </ci>
+              </apply>
+            </math>
+          </eventAssignment>
+          <eventAssignment variable="mwfdd8903f_4511_4a95_91e1_08eac3816ace">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <apply>
+                <divide/>
+                <cn type="integer"> 5 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <ci> mwab43d34d_bd16_4287_beef_6d2a31a8dfab </ci>
+                  <apply>
+                    <minus/>
+                    <cn type="integer"> 1 </cn>
+                    <ci> mw0368ec6f_dcb8_44fb_b030_04227c8f2289 </ci>
+                  </apply>
+                </apply>
+              </apply>
+            </math>
+          </eventAssignment>
+          <eventAssignment variable="mw2cf3534b_6b9e_421b_a288_87438d361d1a">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <apply>
+                <divide/>
+                <cn type="integer"> 5 </cn>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 2 </cn>
+                  <ci> mwab43d34d_bd16_4287_beef_6d2a31a8dfab </ci>
+                  <ci> mw9e8c1611_d330_4410_8afa_b557ee6ae518 </ci>
+                </apply>
+              </apply>
+            </math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+      <event id="mwcbe170bb_ce10_4883_8371_4c080a6db62f" name="Insulin secretion activation">
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <and/>
+              <apply>
+                <gt/>
+                <ci> mw77fea9d2_cd94_48b5_b246_48b8cd7006ab </ci>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 0 </cn>
+                  <ci> mw77fea9d2_cd94_48b5_b246_48b8cd7006ab </ci>
+                </apply>
+              </apply>
+              <apply>
+                <gt/>
+                <ci> mw072c487f_11e0_481a_8750_7360feb3dd95 </ci>
+                <ci> mw78c37feb_f2bd_4882_9f6e_c276a9cebc80 </ci>
+              </apply>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="mw936afe30_3547_4fc9_a4e4_db23aa1b8802">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <cn type="integer"> 1 </cn>
+            </math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+      <event id="mw5351d8f1_c08e_4aab_a0ec_b6851b8e3022" name="Insulin secretion deactivation">
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <or/>
+              <apply>
+                <leq/>
+                <ci> mw77fea9d2_cd94_48b5_b246_48b8cd7006ab </ci>
+                <apply>
+                  <times/>
+                  <cn type="integer"> 0 </cn>
+                  <ci> mw77fea9d2_cd94_48b5_b246_48b8cd7006ab </ci>
+                </apply>
+              </apply>
+              <apply>
+                <lt/>
+                <ci> mw072c487f_11e0_481a_8750_7360feb3dd95 </ci>
+                <ci> mw78c37feb_f2bd_4882_9f6e_c276a9cebc80 </ci>
+              </apply>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="mw936afe30_3547_4fc9_a4e4_db23aa1b8802">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <cn type="integer"> 0 </cn>
+            </math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+      <event id="mw9957ece2_46e1_479d_babd_6f792a66584c" name="Glucose-insulin signal activation">
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <geq/>
+              <apply>
+                <times/>
+                <ci> mw529076be_117c_48a7_b6fd_341975ebc306 </ci>
+                <apply>
+                  <minus/>
+                  <ci> mw072c487f_11e0_481a_8750_7360feb3dd95 </ci>
+                  <ci> mw78c37feb_f2bd_4882_9f6e_c276a9cebc80 </ci>
+                </apply>
+              </apply>
+              <apply>
+                <minus/>
+                <ci> mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2 </ci>
+              </apply>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="mw8d5e0f6d_c410_4cf5_9f79_7047ebc80511">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <cn type="integer"> 1 </cn>
+            </math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+      <event id="mwc5531d05_71c8_4b6a_8f5c_ece87dfb7427" name="Glucose-insulin signal deactivation">
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <lt/>
+              <apply>
+                <times/>
+                <ci> mw529076be_117c_48a7_b6fd_341975ebc306 </ci>
+                <apply>
+                  <minus/>
+                  <ci> mw072c487f_11e0_481a_8750_7360feb3dd95 </ci>
+                  <ci> mw78c37feb_f2bd_4882_9f6e_c276a9cebc80 </ci>
+                </apply>
+              </apply>
+              <apply>
+                <minus/>
+                <ci> mwb8536e7d_ea02_401c_b9ac_e7d6d6f65aa2 </ci>
+              </apply>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="mw8d5e0f6d_c410_4cf5_9f79_7047ebc80511">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <cn type="integer"> 0 </cn>
+            </math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+      <event id="mw4f1b7170_7880_4239_883c_02e93f3f8786" name="Renal excretion activation">
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <gt/>
+              <ci> mw8cffdc97_f543_4cae_9430_ef71d8ac8e64 </ci>
+              <ci> mw18903375_d31f_412f_a9df_300585441cb4 </ci>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="mw8e78e838_18fa_47c8_9e8b_b7e1473b07a1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <cn type="integer"> 1 </cn>
+            </math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+      <event id="mwd0986451_8fbf_473f_b321_32582f0ada2a" name="Renal excretion deactivation">
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <leq/>
+              <ci> mw8cffdc97_f543_4cae_9430_ef71d8ac8e64 </ci>
+              <ci> mw18903375_d31f_412f_a9df_300585441cb4 </ci>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="mw8e78e838_18fa_47c8_9e8b_b7e1473b07a1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <cn type="integer"> 0 </cn>
+            </math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+      <event id="mw2edf6a3f_2e24_4a1b_b969_c6e2c1e31b35" name="Reduced beta cell responsivity after lunch">
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <geq/>
+              <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+              <ci> mwb5a1b99d_46fd_4bba_a14c_797059e4fca2 </ci>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="mw529076be_117c_48a7_b6fd_341975ebc306">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <apply>
+                <times/>
+                <cn> 0.75 </cn>
+                <ci> mw529076be_117c_48a7_b6fd_341975ebc306 </ci>
+              </apply>
+            </math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+      <event id="mw460168ea_4511_4186_bce8_60bf620fc49d" name="Reduced insulin sensitivity after evening meal">
+        <trigger>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <apply>
+              <geq/>
+              <csymbol encoding="text" definitionURL="http://www.sbml.org/sbml/symbols/time"> time </csymbol>
+              <ci> mw66c22ac2_d8ef_4b0c_adfc_1def7604ccba </ci>
+            </apply>
+          </math>
+        </trigger>
+        <listOfEventAssignments>
+          <eventAssignment variable="mwd156b780_977b_44b9_8fed_085c32c892b1">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <apply>
+                <times/>
+                <cn> 0.75 </cn>
+                <ci> mwd156b780_977b_44b9_8fed_085c32c892b1 </ci>
+              </apply>
+            </math>
+          </eventAssignment>
+        </listOfEventAssignments>
+      </event>
+    </listOfEvents>
+  </model>
+</sbml>

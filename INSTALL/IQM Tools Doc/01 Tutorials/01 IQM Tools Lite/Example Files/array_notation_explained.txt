@@ -1,0 +1,160 @@
+********** MODEL NAME
+Length Distribution of Actin Filaments (example for the vectorized model syntax)
+
+********** MODEL NOTES
+Model for the length distribution of actin filaments in presence of a Capping Protein
+Based on Edelstein-Keshet:  Models for the Length Distributions of Actin Filaments
+Bulletin of Mathematical Biology, 1998
+
+x<n> is the concentration of filaments of length n
+CPN<n> is the concentration of capped actin filaments of length n
+A is the concentration of monomeric actin in solution available for polymerization.
+
+This model is an example on how the vectorized syntax for TEXT (ODE) models in the 
+IQM Tools Lite can be used. The model was implemented and documented by Federico Vaggi,
+from the FIRC Institute of Molecular Oncology Foundation, Milan, Italy.
+
+Note that during model import using the IQMmodel function, a model in the vectorized 
+snytax is expanded to a standard IQMmodel. To import this example model, please type:
+
+ >> model = IQMmodel('array.txt')
+ 
+And have a look at the resulting model to get a better insight what is done during 
+import:
+
+ >> IQMedit(model)
+ 
+Set the parameters "min" and "N" to other values and redo the import and model display.
+
+Note that (currently) for TEXTBC models no equivalent representation in terms of a 
+vectorized syntax does exist.
+
+********** MODEL STATES
+
+% DIFFERENTIAL EQUATIONS
+
+d/dt(x<n,0:min-1>)=0
+% Actin Filaments shorter than the minimal length (n=0,1,...,min-1) do not grow. 
+% "min" is defined as a parameter. Alternatively, numeric values can be used instead 
+% of "min". "n" is the name of the index variable, which can be used on the right hand 
+% side of the diff. equation (see next equation for an example).
+
+d/dt(x<n,min>) = knuc*(A)^n + koff*x<n+1> - (kon*A+koff)*x<n> - koncap*x<n>*CP + koffcap*CPN<n>
+% The minimal size of filaments are nucleated. The rate of nucleation depends on the 
+% size of the actin filaments we decide, and the rate of nucleation. For measuring 
+% in-vitro experiments, over the timeframes considered usually we can approximate 
+% that the number of filaments in the system is constant, in that case, equation 2 becomes:
+% koff*x<n+1> - (kon*A)*x<n>
+% The koncap*x<n>*CP-koffcap*CPN<n> term represents the loss of uncapped filaments to 
+% capping. Note that we can use array notation to define custom functions.
+
+d/dt(x<n,min+1:N>)= kon*A*x<n-1> + koff*x<n+1> - (kon*A+koff)*x<n> - koncap*x<n>*CP + koffcap*CPN<n>
+% The filaments grow up to an arbitrary size N.  If there is a significant amount of 
+% filaments at length N, the model is no longer accurate, a choice of N is important 
+% as a trade off between speed of simulation and accuracy.
+
+d/dt(x<n,N+1>) = kon*A*x<n-1> - koff*x<n>- koncap*x<n>*CP+ koffcap*CPN<n>
+% The last filament cannot grow any further.
+
+d/dt(CPN<n,min:N+1>) = koncap*x<n>*CP-koffcap*CPN<n>
+% Filaments of length x<n> becoming capped and are unable to polymerize or depolymerize 
+% any further.
+
+
+% INITIAL CONDITIONS
+
+x<n,min>(0) = 0.01
+% Initial concentration of filaments present in the system.  
+% We assume all filaments are the shortest possible length.
+% All other initial conditions are zero and thus do not need to be specified.
+
+% In general, the array notation can also be used to define initial conditions. Examples:
+% x<n,5:9> = 1
+% x<n,min+1:N> = 0.1
+% Additional the initial conditions can consist of mathematical expressions, involving
+% parameters in the model. Example:
+% x<n,[min+1:N]>(0) = sqrt(n)/N*CPt
+% Note that the commented three initial condition examples do not make biological 
+% sense but just are there to document the syntax.
+
+********** MODEL PARAMETERS
+N = 125     % Maximum considered filament length
+min = 3     % Minimum length of filaments that allows for growth
+
+% Model parameters
+koff    = 1.3       % filament shrink rate constant
+kon     = 11.6      % filament growth rate constant
+koncap  = 6.3       % capping kon
+koffcap = 0.0005    % capping koff
+knuc    = 0.2       % actin nucleation rate constant
+CPt     = 0.01      % total concentration of capping proteins
+At      = 2.0       % total concentration of actin molecules
+
+********** MODEL VARIABLES
+
+FaN = arraysumIQM(x<I,min:N+1>*I)
+% Total amount of polymerized actin in uncapped filaments.  A filament of length I 
+% has I units of actin.
+
+% The "arraysumIQM" allows to represent sums of array elements and sums of functions 
+% involving single array elements. Example:
+% arraysumIQM(x<n,[1 2 5 9]>) is expanded to: x1+x2+x5+x9
+% arraysumIQM(1/(y<n,2:2:19>+1)) is expanded to 1/(y2+1) + 1/(y4+1) + ... + 1/(y18+1)
+% of course, instead of numerical values for the vector definition also model 
+% parameters ("min", "N", etc.) can be used.
+
+FaCP= arraysumIQM(CPN<I,min:N+1>*I)
+% Total amount of polymerized actin in capped filaments.
+
+Fatot=FaN+FaCP
+% Total amount of polymerized actin.  Note - the arraysum function can only be 
+% called once in each variable
+% => Fatot = arraysumIQM(x<I,min:N+1>*I) + arraysumIQM(CPN<I,min:N+1>*I) is NOT valid.
+
+Nuncaptot = arraysumIQM(x<I,min:N+1>)
+% Total amount of uncapped actin filaments.
+
+CPNtot= arraysumIQM(CPN<I,min:N+1>)
+% Total amount of capped actin filaments.
+
+Ntot=Nuncaptot+CPNtot
+% Total amount of actin filaments.
+
+LengthAvg=Fatot/Ntot
+
+CP = CPt - CPNtot
+% Conservation law for capping protein.
+
+A = At - Fatot
+% Conservation law for actin.  We are assuming we are interested in an in-vitro 
+% system, where total actin is conserved. For the study of in-vivo systems, a 
+% better assumption is that A is buffered constant around a fixed concentration 
+% instead of being conserved.
+
+% Additionally, variables can also be defined using the array notation.
+% Example:
+% k<n,[0:3]> = 0.5*exp(0.3*n)
+% k<n,min:N-1> = sqrt(n/N)+5
+% ... etc.
+
+********** MODEL REACTIONS
+% Of course, you can also use the array syntax for the definition of reactions.
+% For example, in this model the capping reactions could be written as:
+%
+% CAPPING<n,min:N+1>= koncap*x<n>*CP-koffcap*CPN<n>
+%
+% Using this reaction definition, the corresponding ODE right hand sides would 
+% look like:
+% d/dt(x<n,min>) = knuc*(A)^n + koff*x<n+1> - (kon*A+koff)*x<n> - CAPPING<n>
+% d/dt(x<n,min+1:N>)= kon*A*x<n-1> + koff*x<n+1> - (kon*A+koff)*x<n> - CAPPING<n>
+% d/dt(x<n,N+1>) = kon*A*x<n-1> - koff*x<n> - CAPPING<n>
+% d/dt(CPN<n,min:N+1>) = CAPPING<n>
+
+********** MODEL FUNCTIONS
+% Functions can not yet be vectorized. 
+
+********** MODEL EVENTS
+% Events can not yet be vectorized. 
+
+********** MODEL MATLAB FUNCTIONS
+

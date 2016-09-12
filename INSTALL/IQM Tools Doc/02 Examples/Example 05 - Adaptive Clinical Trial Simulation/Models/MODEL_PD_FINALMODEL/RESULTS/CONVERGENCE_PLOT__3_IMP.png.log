@@ -1,0 +1,12 @@
+<TT>   Figure file generation log         
+       ==================================================================================================================================================================
+
+<TR>   File (relative to calling function) | ../Models/MODEL_PD_FINALMODEL/RESULTS/CONVERGENCE_PLOT__3_IMP.png                                                           
+<TR>   Username                            | henning                                                                                                                     
+<TR>   Date of creation                    | 2015-Nov-08 10:56                                                                                                           
+<TR>   Calling sequence                    | Main analysis file undefined due to execution in parfor loop                                                                
+<TR>                                       | C:/Program Files/MATLAB/R2015b/toolbox/distcomp/remoteParallelFunction.m (Line: 38)                                         
+<TR>                                       | C:/Program Files/MATLAB/R2015b/toolbox/matlab/lang/parallel_function.p (Line: 929)                                          
+<TR>                                       | C:/PROJECTS/iqmtools/01 IQM Tools Suite/IQMpro/tools/05-NLMEtoolsInterfaces/02-NONMEM/IQMrunNONMEMproject.m (Line: 77)      
+<TR>                                       | C:/PROJECTS/iqmtools/01 IQM Tools Suite/IQMpro/tools/05-NLMEtoolsInterfaces/02-NONMEM/IQMplotConvergenceNONMEM.m (Line: 326)
+<TR>                                       | C:/PROJECTS/iqmtools/01 IQM Tools Suite/IQMlite/auxiliary/output/IQMprintFigure.m (Line: 105)                               

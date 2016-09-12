@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbml xmlns="http://www.sbml.org/sbml/level2" level="2" version="1">
+<model id="CellCycle">
+
+<listOfCompartments>
+ <compartment id="Document" size="1.0" constant="false" />
+</listOfCompartments>
+
+<listOfSpecies>
+  <species id="PYT" compartment="Document" initialConcentration="0" />
+  <species id="PYTP" compartment="Document" initialConcentration="0" />
+  <species id="MPF" compartment="Document" initialConcentration="0" />
+  <species id="Cyclin" compartment="Document" initialConcentration="0" />
+  <species id="YT" compartment="Document" initialConcentration="0" />
+  <species id="Cdc25P" compartment="Document" initialConcentration="1" />
+  <species id="Wee1" compartment="Document" initialConcentration="0" />
+  <species id="APC_" compartment="Document" initialConcentration="0" />
+  <species id="Cdc25" compartment="Document" initialConcentration="0" />
+  <species id="Wee1P" compartment="Document" initialConcentration="1" />
+  <species id="IEP" compartment="Document" initialConcentration="0" />
+  <species id="IE" compartment="Document" initialConcentration="1" />
+  <species id="APC" compartment="Document" initialConcentration="1" />
+  <species id="Cdc2" compartment="Document" boundaryCondition="true" />
+  <species id="AA" compartment="Document" boundaryCondition="true" />
+</listOfSpecies>
+
+<listOfParameters>
+  <parameter id="trans1_k3" value="0.5" />
+  <parameter id="trans2_k1" value="0.01" />
+  <parameter id="trans3_V25p" value="0.017" />
+  <parameter id="trans3_V25pp" value="0.17" />
+  <parameter id="trans4_Vweepp" value="1" />
+  <parameter id="trans4_Vweep" value="0.01" />
+  <parameter id="trans5_kcak" value="0.64" />
+  <parameter id="trans6_kpp" value="0.004" />
+  <parameter id="trans7_V25p" value="0.017" />
+  <parameter id="trans7_V25pp" value="0.17" />
+  <parameter id="trans8_Vweepp" value="1" />
+  <parameter id="trans8_Vweep" value="0.01" />
+  <parameter id="trans9_kcak" value="0.64" />
+  <parameter id="trans10_kpp" value="0.004" />
+  <parameter id="trans12_V2p" value="0.005000000000000001" />
+  <parameter id="trans12_V2pp" value="0.25" />
+  <parameter id="trans13_kf" value="0.1" />
+  <parameter id="trans13_Kf" value="1" />
+  <parameter id="trans15_ka" value="2" />
+  <parameter id="trans15_Ka" value="0.1" />
+  <parameter id="trans16_kb" value="0.1" />
+  <parameter id="trans16_Kb" value="1" />
+  <parameter id="trans17_kg" value="2" />
+  <parameter id="trans17_Kg" value="0.01" />
+  <parameter id="trans18_kh" value="0.15" />
+  <parameter id="trans18_Kh" value="0.01" />
+  <parameter id="trans19_kd" value="0.13" />
+  <parameter id="trans19_Kd" value="1" />
+  <parameter id="trans20_kc" value="0.13" />
+  <parameter id="trans20_Kc" value="0.01" />
+  <parameter id="trans21_V2p" value="0.005000000000000001" />
+  <parameter id="trans21_V2pp" value="0.25" />
+  <parameter id="trans22_V2p" value="0.005000000000000001" />
+  <parameter id="trans22_V2pp" value="0.25" />
+  <parameter id="trans11_V2p" value="0.005000000000000001" />
+  <parameter id="trans11_V2pp" value="0.25" />
+  <parameter id="trans14_V2p" value="0.005000000000000001" />
+  <parameter id="trans14_V2pp" value="0.25" />
+  <parameter id="trans23_ke" value="2" />
+  <parameter id="trans23_Ke" value="0.1" />
+</listOfParameters>
+
+<listOfRules>
+  <assignmentRule variable="Cdc2"><math xmlns="http://www.w3.org/1998/Math/MathML"><cn type="integer">1</cn></math></assignmentRule>
+  <assignmentRule variable="AA"><math xmlns="http://www.w3.org/1998/Math/MathML"><cn>1.0</cn></math></assignmentRule>
+</listOfRules>
+
+<listOfReactions>
+  <reaction id="trans1"><listOfReactants><speciesReference species="Cyclin" stoichiometry="1" /><speciesReference species="Cdc2" /></listOfReactants><listOfProducts><speciesReference species="YT" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>trans1_k3</ci><ci>Cyclin</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans2"><listOfReactants><speciesReference species="AA" /></listOfReactants><listOfProducts><speciesReference species="Cyclin" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><ci>trans2_k1</ci><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans3"><listOfReactants><speciesReference species="PYT" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="YT" stoichiometry="1" /></listOfProducts><listOfModifiers><modifierSpeciesReference species="Cdc25P" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><plus/><ci>trans3_V25p</ci><apply><times/><ci>Cdc25P</ci><apply><minus/><ci>trans3_V25pp</ci><ci>trans3_V25p</ci></apply></apply></apply><ci>PYT</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans4"><listOfReactants><speciesReference species="YT" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="PYT" stoichiometry="1" /></listOfProducts><listOfModifiers><modifierSpeciesReference species="Wee1" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><plus/><ci>trans4_Vweepp</ci><apply><times/><apply><minus/><cn type="integer">1</cn><ci>Wee1</ci></apply><apply><minus/><ci>trans4_Vweep</ci><ci>trans4_Vweepp</ci></apply></apply></apply><ci>YT</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans5"><listOfReactants><speciesReference species="PYT" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="PYTP" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>trans5_kcak</ci><ci>PYT</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans6"><listOfReactants><speciesReference species="PYTP" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="PYT" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>trans6_kpp</ci><ci>PYTP</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans7"><listOfReactants><speciesReference species="PYTP" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="MPF" stoichiometry="1" /></listOfProducts><listOfModifiers><modifierSpeciesReference species="Cdc25P" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><plus/><ci>trans7_V25p</ci><apply><times/><ci>Cdc25P</ci><apply><minus/><ci>trans7_V25pp</ci><ci>trans7_V25p</ci></apply></apply></apply><ci>PYTP</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans8"><listOfReactants><speciesReference species="MPF" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="PYTP" stoichiometry="1" /></listOfProducts><listOfModifiers><modifierSpeciesReference species="Wee1" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><plus/><ci>trans8_Vweepp</ci><apply><times/><apply><minus/><cn type="integer">1</cn><ci>Wee1</ci></apply><apply><minus/><ci>trans8_Vweep</ci><ci>trans8_Vweepp</ci></apply></apply></apply><ci>MPF</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans9"><listOfReactants><speciesReference species="YT" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="MPF" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>trans9_kcak</ci><ci>YT</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans10"><listOfReactants><speciesReference species="MPF" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="YT" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><ci>trans10_kpp</ci><ci>MPF</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans12"><listOfReactants><speciesReference species="Cyclin" stoichiometry="1" /></listOfReactants><listOfModifiers><modifierSpeciesReference species="APC_" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><plus/><ci>trans12_V2p</ci><apply><times/><ci>APC_</ci><apply><minus/><ci>trans12_V2pp</ci><ci>trans12_V2p</ci></apply></apply></apply><ci>Cyclin</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans13"><listOfReactants><speciesReference species="Wee1P" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="Wee1" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>trans13_kf</ci><ci>Wee1P</ci></apply><apply><plus/><ci>trans13_Kf</ci><ci>Wee1P</ci></apply></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans15"><listOfReactants><speciesReference species="Cdc25" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="Cdc25P" stoichiometry="1" /></listOfProducts><listOfModifiers><modifierSpeciesReference species="MPF" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><apply><times/><ci>trans15_ka</ci><ci>MPF</ci></apply><ci>Cdc25</ci></apply><apply><plus/><ci>trans15_Ka</ci><ci>Cdc25</ci></apply></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans16"><listOfReactants><speciesReference species="Cdc25P" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="Cdc25" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>trans16_kb</ci><ci>Cdc25P</ci></apply><apply><plus/><ci>trans16_Kb</ci><ci>Cdc25P</ci></apply></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans17"><listOfReactants><speciesReference species="IE" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="IEP" stoichiometry="1" /></listOfProducts><listOfModifiers><modifierSpeciesReference species="MPF" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><apply><times/><ci>trans17_kg</ci><ci>MPF</ci></apply><ci>IE</ci></apply><apply><plus/><ci>trans17_Kg</ci><ci>IE</ci></apply></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans18"><listOfReactants><speciesReference species="IEP" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="IE" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>trans18_kh</ci><ci>IEP</ci></apply><apply><plus/><ci>trans18_Kh</ci><ci>IEP</ci></apply></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans19"><listOfReactants><speciesReference species="APC_" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="APC" stoichiometry="1" /></listOfProducts><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><ci>trans19_kd</ci><ci>APC_</ci></apply><apply><plus/><ci>trans19_Kd</ci><ci>APC_</ci></apply></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans20"><listOfReactants><speciesReference species="APC" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="APC_" stoichiometry="1" /></listOfProducts><listOfModifiers><modifierSpeciesReference species="IEP" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><apply><times/><ci>trans20_kc</ci><ci>IEP</ci></apply><ci>APC</ci></apply><apply><plus/><ci>trans20_Kc</ci><ci>APC</ci></apply></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans21"><listOfReactants><speciesReference species="MPF" stoichiometry="1" /></listOfReactants><listOfModifiers><modifierSpeciesReference species="APC_" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><plus/><ci>trans21_V2p</ci><apply><times/><ci>APC_</ci><apply><minus/><ci>trans21_V2pp</ci><ci>trans21_V2p</ci></apply></apply></apply><ci>MPF</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans22"><listOfReactants><speciesReference species="YT" stoichiometry="1" /></listOfReactants><listOfModifiers><modifierSpeciesReference species="APC_" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><plus/><ci>trans22_V2p</ci><apply><times/><ci>APC_</ci><apply><minus/><ci>trans22_V2pp</ci><ci>trans22_V2p</ci></apply></apply></apply><ci>YT</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans11"><listOfReactants><speciesReference species="PYT" stoichiometry="1" /></listOfReactants><listOfModifiers><modifierSpeciesReference species="APC_" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><plus/><ci>trans11_V2p</ci><apply><times/><ci>APC_</ci><apply><minus/><ci>trans11_V2pp</ci><ci>trans11_V2p</ci></apply></apply></apply><ci>PYT</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans14"><listOfReactants><speciesReference species="PYTP" stoichiometry="1" /></listOfReactants><listOfModifiers><modifierSpeciesReference species="APC_" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><times/><apply><plus/><ci>trans14_V2p</ci><apply><times/><ci>APC_</ci><apply><minus/><ci>trans14_V2pp</ci><ci>trans14_V2p</ci></apply></apply></apply><ci>PYTP</ci></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+  <reaction id="trans23"><listOfReactants><speciesReference species="Wee1" stoichiometry="1" /></listOfReactants><listOfProducts><speciesReference species="Wee1P" stoichiometry="1" /></listOfProducts><listOfModifiers><modifierSpeciesReference species="MPF" /></listOfModifiers><kineticLaw><math xmlns="http://www.w3.org/1998/Math/MathML"><apply><times/><apply><divide/><apply><times/><apply><times/><ci>trans23_ke</ci><ci>MPF</ci></apply><ci>Wee1</ci></apply><apply><plus/><ci>trans23_Ke</ci><ci>Wee1</ci></apply></apply><ci>Document</ci></apply></math></kineticLaw></reaction>
+</listOfReactions>
+
+
+</model>
+</sbml>

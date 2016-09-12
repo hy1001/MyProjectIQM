@@ -1,0 +1,13 @@
+********** DOSING NAME
+Example dosing
+
+********** DOSING NOTES
+Matched to modelPK.txt
+Bolus administration as INPUT1
+For link to NLME parameter estimation no definition of nonzero dose or time
+is needed and thus values can be kept to 0
+
+********** INPUT1
+type:         BOLUS
+time:         0
+D:            400  % (mg)

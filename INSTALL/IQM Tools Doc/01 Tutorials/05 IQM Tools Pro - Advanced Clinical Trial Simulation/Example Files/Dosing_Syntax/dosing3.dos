@@ -1,0 +1,21 @@
+********** DOSING NAME
+Dosing example 3
+
+********** DOSING NOTES
+This dosing example shows that you can have several input definitions in 
+your dosing file.
+
+********** INPUT1
+type:           ABSORPTION1
+time:           0       % time for first application
+D:              10      % (unit) dose
+ka:             1       % Absorption rate constant
+
+********** INPUT3
+type:           INFUSION
+time:           0       % time for first application
+deltaT:         14      % (days) time inbetween applications
+nr_repetitions: 5       % number of applications 
+D:              10      % (unit) dose
+Tinf:           2/24    % (days) 2 hours
+

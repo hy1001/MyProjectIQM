@@ -1,0 +1,65 @@
+********** MODEL NAME
+Example PKPD Model
+
+********** MODEL NOTES
+PK model for both IV and subcut administration, 2 compartmental 
+distribution model with Michaelis Menten elimination.
+
+Indirect response PD model with saturable effect on input, 
+driven by plasma concentration.
+
+Goal: PK fit already done and individual parameters provided in the PD 
+      dataset as regression parameters. So, we want to do a PD fit.
+
+Units
+-----
+Time:    hours
+Inputs:  mg
+Output:  ug/ml
+
+********** MODEL STATES
+
+d/dt(Ac) = -(VMX*Cc)/(KM+Cc) - CL/Vc*Ac - Q/Vc*Ac + Q/Vp*Ap + INPUT1 + F_subcut*INPUT2
+d/dt(Ap) =                                Q/Vc*Ac - Q/Vp*Ap   
+
+d/dt(PD) = kin*(1+EMAX*Cc/(EC50+Cc)) - kdeg*PD
+
+PD(0)    = BASELINE
+
+********** MODEL PARAMETERS
+% PK parameters obtained from dataset
+F_subcut  = 0.5     % <regression> (.)       Subcut bioavailability relative to IV
+CL       = 0.303    % <regression> (L/day)   Plasma clearance
+Vc       = 2.83     % <regression> (L)       Central compartment volume
+Q        = 0.724    % <regression> (L/day)   Intercompartmental clearance
+Vp       = 4.43     % <regression> (L)       Peripheral compartment volume
+VMX      = 0.5      % <regression> (mg/day)  Maximum rate of elimination via Michaelis Menten kinetics
+KM       = 1.86     % <regression> (ug/ml)   Michaelis Menten constant
+
+% PD parameters to be estimated
+BASELINE = 1        % <estimate> (.)
+kdeg     = 0.1      % <estimate> (1/day)
+EMAX     = 1        % <estimate> (.)
+EC50     = 1        % <estimate> (ug/ml)
+
+********** MODEL VARIABLES
+% Determin kin 
+kin      = kdeg*BASELINE 	% (1/day)
+
+% Determine plasma concentration
+Cc       = Ac/Vc    		% (ug/ml = mg/L)       Plasma PK concentration
+
+% Define output variable (PD) for NLME parameter estimation interface
+OUTPUT1  = PD 				% (.)
+
+********** MODEL REACTIONS
+
+
+********** MODEL FUNCTIONS
+
+
+********** MODEL EVENTS
+
+
+********** MODEL MATLAB FUNCTIONS
+

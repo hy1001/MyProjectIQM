@@ -1,0 +1,11 @@
+********** DOSING NAME
+DOSING
+
+********** DOSING NOTES
+Dosing description 
+
+********** INPUT1
+type:       BOLUS   % Glucose intake modeled as bolus
+time:       0       % Time of dosing
+D:          75      % (g) Glucose
+

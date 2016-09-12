@@ -1,0 +1,13 @@
+********** EXPERIMENT NAME
+Simple Experiment
+
+********** EXPERIMENT NOTES
+Simple Experiment for Simple Model
+
+********** EXPERIMENT INITIAL PARAMETER AND STATE SETTINGS
+k1 = 2
+
+********** EXPERIMENT PARAMETER CHANGES
+
+********** EXPERIMENT STATE CHANGES
+time = 10, A = 1
